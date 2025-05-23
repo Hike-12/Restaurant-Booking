@@ -1,31 +1,65 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Calendar, Users, QrCode, ArrowRight } from "lucide-react";
+import { Spinner } from "./Spinner";
+import OptimizedImage from "./OptimizedImage";
+import { preloadImages } from "../hooks/useImageCache";
 
 const EventList = () => {
-  const [events, setEvents] = useState([]);
   const navigate = useNavigate();
+  const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch events from the backend
-  const fetchEvents = async () => {
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/events/");
-      const data = await response.json();
-      setEvents(data);
-    } catch (error) {
-      console.error("Error fetching events:", error);
-    }
-  };
+  useEffect(() => {
+    const fetchEvents = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch("http://127.0.0.1:8000/api/events/");
+        if (!response.ok) {
+          throw new Error("Failed to fetch events");
+        }
+        const data = await response.json();
+        setEvents(data);
+
+        // Preload all event images to speed up rendering
+        const imageUrls = data.flatMap((event) => [
+          `http://127.0.0.1:8000${event.img}`,
+          `http://127.0.0.1:8000${event.qr_code}`,
+        ]);
+        preloadImages(imageUrls);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchEvents();
+  }, []);
 
   const handleEventClick = (eventId) => {
-    // Make sure to pass eventId as a primitive value
     navigate(`/event-schedules?eventId=${eventId}`);
   };
 
-  useEffect(() => {
-    fetchEvents();
-  }, []);
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-sand py-12 px-4 flex justify-center items-center">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-sand py-12 px-4 flex justify-center items-center">
+        <div className="text-red-600 bg-red-100 p-4 rounded-lg">
+          Error loading events: {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-sand py-12 px-4 flex flex-col items-center">
@@ -47,11 +81,14 @@ const EventList = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.07, duration: 0.5, ease: "easeOut" }}
             >
-              <img
-                src={`http://127.0.0.1:8000${event.img}`}
-                alt={event.type}
-                className="w-full h-56 object-cover rounded-t-3xl"
-              />
+              <div className="relative h-56">
+                <OptimizedImage
+                  src={event.img}
+                  alt={event.type}
+                  className="w-full h-56 object-cover rounded-t-3xl"
+                  height="224px"
+                />
+              </div>
               <div className="p-6 flex-1 flex flex-col">
                 <h3 className="font-bold text-2xl text-black mb-2">
                   {event.type}
@@ -73,10 +110,12 @@ const EventList = () => {
                 <div className="flex justify-center mb-4">
                   <div className="relative">
                     <QrCode size={18} className="absolute top-0 left-0 text-olive m-2" />
-                    <img
-                      src={`http://127.0.0.1:8000${event.qr_code}`}
+                    <OptimizedImage
+                      src={event.qr_code}
                       alt={`QR Code for ${event.type}`}
                       className="w-28 h-28 object-cover border-2 border-olive rounded-xl"
+                      width="112px"
+                      height="112px"
                     />
                   </div>
                 </div>

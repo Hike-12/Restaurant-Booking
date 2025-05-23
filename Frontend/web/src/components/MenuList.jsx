@@ -1,23 +1,56 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Coffee, DollarSign, Flame, UtensilsCrossed } from "lucide-react";
+import { Spinner } from "./Spinner";
+import OptimizedImage from "./OptimizedImage";
+import { preloadImages } from "../hooks/useImageCache";
 
 const MenuList = () => {
   const [menus, setMenus] = useState([]);
-
-  const fetchMenus = async () => {
-    try {
-      const response = await fetch("http://127.0.0.1:8000/api/menus/");
-      const data = await response.json();
-      setMenus(data);
-    } catch (error) {
-      console.error("Error fetching menus:", error);
-    }
-  };
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
+    const fetchMenus = async () => {
+      try {
+        setIsLoading(true);
+        const response = await fetch("http://127.0.0.1:8000/api/menus/");
+        if (!response.ok) {
+          throw new Error("Failed to fetch menus");
+        }
+        const data = await response.json();
+        setMenus(data);
+
+        // Preload all menu images
+        const imageUrls = data.map((menu) => `http://127.0.0.1:8000${menu.img}`);
+        preloadImages(imageUrls);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchMenus();
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-sand py-12 px-4 flex justify-center items-center">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-sand py-12 px-4 flex justify-center items-center">
+        <div className="text-red-600 bg-red-100 p-4 rounded-lg">
+          Error loading menu: {error}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-sand py-12 px-4">
@@ -42,10 +75,11 @@ const MenuList = () => {
               whileHover={{ scale: 1.02 }}
             >
               <div className="relative">
-                <img
-                  src={`http://127.0.0.1:8000${menu.img}`}
+                <OptimizedImage
+                  src={menu.img}
                   alt={menu.item}
                   className="w-full h-56 object-cover rounded-t-3xl"
+                  height="224px"
                 />
                 <div className="absolute top-4 right-4 bg-olive text-sand px-3 py-1 rounded-full text-xs font-semibold shadow flex items-center">
                   <DollarSign size={14} className="mr-1" />

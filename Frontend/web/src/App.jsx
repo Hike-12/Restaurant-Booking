@@ -17,12 +17,14 @@ import Reviews from "./components/Reviews";
 import Chatbot from "./components/Chatbot";
 import VRScene from "./components/VRScene";
 import Footer from "./components/Footer";
+import { QueryClient,QueryClientProvider } from "@tanstack/react-query";
 
 // Wrap routes with AnimatePresence for smooth page transitions
 function AnimatedRoutes() {
   const location = useLocation();
-  
+  const queryClient = new QueryClient();
   return (
+    <QueryClientProvider client={queryClient}>
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
@@ -40,6 +42,7 @@ function AnimatedRoutes() {
         <Route path="/logout" element={<Logout />} />
       </Routes>
     </AnimatePresence>
+    </QueryClientProvider>
   );
 }
 

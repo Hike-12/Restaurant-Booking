@@ -1,17 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
+import OptimizedImage from "./OptimizedImage";
 
 const ChefCard = ({ chef }) => {
+  const [imageLoaded, setImageLoaded] = useState(false);
+
   return (
     <motion.div
       className="bg-beige rounded-3xl shadow-xl border-2 border-olive flex flex-col transition-transform hover:-translate-y-2 hover:shadow-2xl duration-300"
       whileHover={{ scale: 1.03 }}
     >
       <div className="relative">
-        <img
-          className="rounded-t-3xl w-full h-56 object-cover border-b-2 border-olive"
-          src={`http://127.0.0.1:8000${chef.img}`}
+        <OptimizedImage
+          src={chef.img}
           alt={chef.name}
+          className="rounded-t-3xl w-full h-56 object-cover border-b-2 border-olive"
+          height="224px"
+          onLoad={() => setImageLoaded(true)}
         />
         <div className="absolute top-4 right-4 bg-olive text-sand px-3 py-1 rounded-full text-xs font-semibold shadow">
           {chef.cuisine}

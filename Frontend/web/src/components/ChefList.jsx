@@ -1,23 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import ChefCard from "./ChefCard";
 import { motion } from "framer-motion";
+import { useQuery } from "@tanstack/react-query";
+import { Spinner } from "./Spinner";
 
 const ChefList = () => {
-  const [chefs, setChefs] = useState([]);
-
-  const fetchChefs = async () => {
-    try {
+  const { data: chefs = [], isLoading, error } = useQuery({
+    queryKey: ["chefs"],
+    queryFn: async () => {
       const response = await fetch("http://127.0.0.1:8000/api/chefs/");
-      const data = await response.json();
-      setChefs(data);
-    } catch (error) {
-      console.error("Error fetching chefs:", error);
-    }
-  };
+      if (!response.ok) {
+        throw new Error("Failed to fetch chefs");
+      }
+      return response.json();
+    },
+    staleTime: 5 * 60 * 1000, // 5 minutes
+  });
 
-  useEffect(() => {
-    fetchChefs();
-  }, []);
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-sand py-12 px-4 flex justify-center items-center">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen bg-sand py-12 px-4 flex justify-center items-center">
+        <div className="text-red-600 bg-red-100 p-4 rounded-lg">
+          Error loading chefs: {error.message}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-sand py-12 px-4">
