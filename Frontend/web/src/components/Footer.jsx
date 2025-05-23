@@ -13,11 +13,11 @@ const Footer = () => {
         <div className="mb-6 flex flex-col items-start">
           <img
             src="src/assets/logo.jpg"
-            alt="Ettarra Logo"
+            alt="The Coffee Cup Logo"
             className="w-20 h-20 rounded-full border-2 border-olive shadow"
           />
           <h2 className="text-2xl font-bold mt-3 text-olive">
-            Ettarra Coffee House
+            The Coffee Cup
           </h2>
         </div>
         <div className="mb-6">
@@ -44,7 +44,7 @@ const Footer = () => {
                 href="#"
                 className="hover:text-olive transition-colors"
               >
-                Ettarra Insists
+                The Coffee Cup Insists
               </a>
             </li>
             <li>
@@ -94,7 +94,7 @@ const Footer = () => {
             <span role="img" aria-label="Email" className="mr-2">
               ✉️
             </span>
-            care@ettarracoffee.in
+            care@coffeecup.in
           </p>
         </div>
         <div className="mb-6 flex flex-col items-start">
@@ -138,7 +138,7 @@ const Footer = () => {
           </a>
         </div>
         <p className="mt-2 text-black">
-          © Ettarra Coffee House 2024. Webworks by Infobahn
+          © The Coffee Cup 2024. Webworks by Infobahn
         </p>
         <p className="text-sm text-olive">
           Registered name: Bunts Hotels Private Limited

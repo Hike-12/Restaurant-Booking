@@ -23,7 +23,7 @@ function App() {
       {/* <Logout /> */}
       <Router>
         <div>
-          {/* <Nav /> */}
+          <Nav />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/menus" element={<MenuList />} />
@@ -44,7 +44,7 @@ function App() {
           </Routes>
         </div>
       </Router>
-      <hr></hr>
+      <hr />
       <Footer />
     </>
   );

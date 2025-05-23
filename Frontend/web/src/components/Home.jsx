@@ -7,7 +7,6 @@ const Home = () => {
   return (
     <>
       <section className="body-font min-h-screen w-full flex flex-col bg-sand">
-        <Nav />
         <motion.div
           className="flex-grow flex flex-col items-center justify-center px-4 py-16"
           initial={{ opacity: 0, y: 40 }}

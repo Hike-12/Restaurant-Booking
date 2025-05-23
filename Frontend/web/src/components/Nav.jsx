@@ -62,11 +62,11 @@ function Nav() {
           <div className="flex flex-row items-center gap-3">
             <img
               src="src/assets/logo.jpg"
-              alt="Ettarra Logo"
+              alt="The Coffee Cup Logo"
               className="w-16 h-16 rounded-full border-2 border-olive shadow"
             />
             <p className="text-3xl font-bold text-olive tracking-wide">
-              Ettarra
+              The Coffee Cup
             </p>
           </div>
           <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center justify-center navbar text-lg font-medium gap-2">
@@ -107,12 +107,14 @@ function Nav() {
               Reviews
             </Link>
             <div className="relative">
+              {!isAuthenticated &&
               <button
                 onClick={toggleDropdown}
                 className={`ml-4 bg-olive text-sand px-6 py-2 rounded-lg shadow hover:bg-black hover:text-beige transition-colors focus:outline-none`}
               >
-                {isAuthenticated ? "Account" : "Login/Sign Up"}
+                Login/Sign Up
               </button>
+              }
               <AnimatePresence>
                 {!isAuthenticated && isDropdownOpen && (
                   <motion.div
