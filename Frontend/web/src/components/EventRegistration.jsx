@@ -7,6 +7,8 @@ const getCsrfToken = () => {
 };
 
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { CalendarCheck } from 'lucide-react';
 
 const EventRegistration = ({ eventId }) => {
     const [status, setStatus] = useState(null);
@@ -35,15 +37,30 @@ const EventRegistration = ({ eventId }) => {
     };
 
     return (
-        <div className="flex flex-col items-center">
+        <motion.div 
+            className="flex flex-col items-center"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+        >
             <button
                 onClick={registerForEvent}
-                className="bg-olive text-sand px-6 py-2 rounded-lg font-semibold shadow hover:bg-black hover:text-beige transition-colors"
+                className="bg-olive text-sand px-6 py-2 rounded-lg font-semibold shadow hover:bg-black hover:text-beige transition-colors flex items-center"
             >
+                <CalendarCheck size={18} className="mr-2" />
                 Register for Event
             </button>
-            {status && <p className="mt-3 text-olive">{status}</p>}
-        </div>
+            {status && (
+                <motion.p 
+                    className="mt-3 text-olive font-medium"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.3 }}
+                >
+                    {status}
+                </motion.p>
+            )}
+        </motion.div>
     );
 };
 

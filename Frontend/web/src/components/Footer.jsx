@@ -26,7 +26,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-olive transition-colors"
+                className="hover:text-olive transition-colors text-black"
               >
                 Home
               </a>
@@ -34,7 +34,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-olive transition-colors"
+                className="hover:text-olive transition-colors text-black"
               >
                 About Us
               </a>
@@ -42,7 +42,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-olive transition-colors"
+                className="hover:text-olive transition-colors text-black"
               >
                 The Coffee Cup Insists
               </a>
@@ -50,7 +50,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-olive transition-colors"
+                className="hover:text-olive transition-colors text-black"
               >
                 Brew Stories
               </a>
@@ -58,7 +58,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-olive transition-colors"
+                className="hover:text-olive transition-colors text-black"
               >
                 Contact Us
               </a>
@@ -71,7 +71,7 @@ const Footer = () => {
             href="https://www.google.com/maps/place/Juhu+Residency+Boutique+Hotel,+Mumbai,+Maharashtra+400049"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-olive transition-colors"
+            className="hover:text-olive transition-colors text-black"
           >
             Juhu Residency Boutique Hotel, Mumbai,<br /> Maharashtra 400049
           </a>
@@ -84,13 +84,13 @@ const Footer = () => {
         </div>
         <div className="mb-6">
           <h3 className="font-bold mb-4 text-olive">Contact</h3>
-          <p className="flex items-center">
+          <p className="flex items-center text-black">
             <span role="img" aria-label="Phone" className="mr-2">
               📞
             </span>
             +91 98256 03145
           </p>
-          <p className="flex items-center mt-2">
+          <p className="flex items-center mt-2 text-black">
             <span role="img" aria-label="Email" className="mr-2">
               ✉️
             </span>
@@ -120,19 +120,19 @@ const Footer = () => {
         <div className="flex justify-center space-x-6 mb-4">
           <a
             href="#"
-            className="hover:text-olive transition-colors"
+            className="hover:text-olive transition-colors text-black"
           >
             <i className="fab fa-facebook text-xl"></i>
           </a>
           <a
             href="#"
-            className="hover:text-olive transition-colors"
+            className="hover:text-olive transition-colors text-black"
           >
             <i className="fab fa-instagram text-xl"></i>
           </a>
           <a
             href="#"
-            className="hover:text-olive transition-colors"
+            className="hover:text-olive transition-colors text-black"
           >
             <i className="fab fa-spotify text-xl"></i>
           </a>

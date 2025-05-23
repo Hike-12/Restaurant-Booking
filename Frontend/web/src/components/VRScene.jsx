@@ -2,6 +2,7 @@ import React from 'react';
 import 'aframe';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { ArrowLeft, Monitor } from "lucide-react"; // Changed to a definitely available icon
 
 const VRScene = () => {
   return (
@@ -12,13 +13,18 @@ const VRScene = () => {
       transition={{ duration: 0.7, ease: "easeOut" }}
     >
       <div className="w-full flex flex-col items-center">
-        <div className="mb-6">
+        <div className="flex justify-between w-full max-w-6xl px-6 mb-6">
           <Link
             to="/"
-            className="bg-olive text-sand px-6 py-2 rounded-lg font-semibold shadow hover:bg-black hover:text-beige transition-colors"
+            className="bg-olive text-sand px-6 py-2 rounded-lg font-semibold shadow hover:bg-black hover:text-beige transition-colors flex items-center"
           >
+            <ArrowLeft size={18} className="mr-2" />
             Back to Home
           </Link>
+          <div className="flex items-center text-black">
+            <Monitor size={24} className="mr-2 text-olive" /> {/* Changed from Cube to Monitor */}
+            <span className="font-semibold">360° Virtual Tour</span>
+          </div>
         </div>
         <div className="w-full flex justify-center">
           <a-scene

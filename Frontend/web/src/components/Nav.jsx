@@ -58,7 +58,7 @@ function Nav() {
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <div className="container mx-auto flex flex-wrap p-4 px-8 flex-col md:flex-row items-center bg-beige/80 shadow-lg rounded-b-2xl border-b-4 border-olive">
+        <div className="container mx-auto flex flex-wrap p-4 px-8 flex-col md:flex-row items-center bg-beige/95 shadow-lg rounded-b-2xl border-b-4 border-olive">
           <div className="flex flex-row items-center gap-3">
             <img
               src="/logo.png"
@@ -70,50 +70,20 @@ function Nav() {
             </p>
           </div>
           <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center justify-center navbar text-lg font-medium gap-2">
-            <Link
-              to="/"
-              className="mx-4 hover:text-olive transition-colors"
-            >
-              Home
-            </Link>
-            <Link
-              to="/menus"
-              className="mx-4 hover:text-olive transition-colors"
-            >
-              Menu
-            </Link>
-            <Link
-              to="/events"
-              className="mx-4 hover:text-olive transition-colors"
-            >
-              Events
-            </Link>
-            <Link
-              to="/chefs"
-              className="mx-4 hover:text-olive transition-colors"
-            >
-              Chefs
-            </Link>
-            <Link
-              to="/chatbot"
-              className="mx-4 hover:text-olive transition-colors"
-            >
-              AI Assistance
-            </Link>
-            <Link
-              to="/reviews"
-              className="mx-4 hover:text-olive transition-colors"
-            >
-              Reviews
-            </Link>
+            <Link to="/" className="mx-4 text-black hover:text-olive transition-colors">Home</Link>
+            <Link to="/menus" className="mx-4 text-black hover:text-olive transition-colors">Menu</Link>
+            <Link to="/events" className="mx-4 text-black hover:text-olive transition-colors">Events</Link>
+            <Link to="/chefs" className="mx-4 text-black hover:text-olive transition-colors">Chefs</Link>
+            <Link to="/chatbot" className="mx-4 text-black hover:text-olive transition-colors">AI Assistance</Link>
+            <Link to="/reviews" className="mx-4 text-black hover:text-olive transition-colors">Reviews</Link>
             <div className="relative">
               {!isAuthenticated &&
-              <button
-                onClick={toggleDropdown}
-                className={`ml-4 bg-olive text-sand px-6 py-2 rounded-lg shadow hover:bg-black hover:text-beige transition-colors focus:outline-none`}
-              >
-                Login/Sign Up
-              </button>
+                <button
+                  onClick={toggleDropdown}
+                  className="ml-4 bg-olive text-sand px-6 py-2 rounded-lg shadow hover:bg-black hover:text-beige transition-colors focus:outline-none"
+                >
+                  Login/Sign Up
+                </button>
               }
               <AnimatePresence>
                 {!isAuthenticated && isDropdownOpen && (
