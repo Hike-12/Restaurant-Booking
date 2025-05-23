@@ -1,18 +1,23 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X, User, LogOut } from "lucide-react";
 
 function Nav() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // State for dropdown visibility
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
-    // Check if the user is authenticated by retrieving the status from localStorage
-    const authStatus = localStorage.getItem("isAuthenticated"); // Example with localStorage
+    // Close mobile menu when route changes
+    setIsMobileMenuOpen(false);
+    // Check authentication
+    const authStatus = localStorage.getItem("isAuthenticated");
     if (authStatus === "true") {
       setIsAuthenticated(true);
     }
-  }, []);
+  }, [location]);
 
   const getCsrfToken = () => {
     const name = "csrftoken";
@@ -46,81 +51,159 @@ function Nav() {
     }
   };
 
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen); // Toggle dropdown visibility
-  };
-
   return (
-    <>
-      <motion.header
-        className="body-font z-10"
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.7, ease: "easeOut" }}
-      >
-        <div className="container mx-auto flex flex-wrap p-4 px-8 flex-col md:flex-row items-center bg-beige/95 shadow-lg rounded-b-2xl border-b-4 border-olive">
-          <div className="flex flex-row items-center gap-3">
+    <motion.header
+      className="sticky top-0 z-50 w-full"
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
+      <div className="container mx-auto px-4 py-3 bg-beige/95 shadow-lg backdrop-blur-sm rounded-b-2xl border-b-2 border-olive">
+        <div className="flex items-center justify-between">
+          {/* Logo and Brand Name */}
+          <Link to="/" className="flex items-center gap-3">
             <img
               src="/logo.png"
               alt="The Coffee Cup Logo"
-              className="w-16 h-16 rounded-full border-2 border-olive shadow"
+              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-olive shadow-md"
             />
-            <p className="text-3xl font-bold text-olive tracking-wide">
+            <span className="text-xl sm:text-3xl font-bold text-olive tracking-wide">
               The Coffee Cup
-            </p>
-          </div>
-          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center justify-center navbar text-lg font-medium gap-2">
-            <Link to="/" className="mx-4 text-black hover:text-olive transition-colors">Home</Link>
-            <Link to="/menus" className="mx-4 text-black hover:text-olive transition-colors">Menu</Link>
-            <Link to="/events" className="mx-4 text-black hover:text-olive transition-colors">Events</Link>
-            <Link to="/chefs" className="mx-4 text-black hover:text-olive transition-colors">Chefs</Link>
-            <Link to="/chatbot" className="mx-4 text-black hover:text-olive transition-colors">AI Assistance</Link>
-            <Link to="/reviews" className="mx-4 text-black hover:text-olive transition-colors">Reviews</Link>
-            <div className="relative">
-              {!isAuthenticated &&
-                <button
-                  onClick={toggleDropdown}
-                  className="ml-4 bg-olive text-sand px-6 py-2 rounded-lg shadow hover:bg-black hover:text-beige transition-colors focus:outline-none"
-                >
-                  Login/Sign Up
-                </button>
-              }
-              <AnimatePresence>
-                {!isAuthenticated && isDropdownOpen && (
-                  <motion.div
-                    className="absolute right-0 mt-2 w-40 bg-beige shadow-xl rounded-lg z-30 border border-olive"
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                  >
-                    <Link
-                      to="/login"
-                      className="block px-4 py-2 text-black text-center rounded-t-lg hover:bg-sand border-b border-olive transition-colors"
-                    >
-                      Login
-                    </Link>
-                    <Link
-                      to="/register"
-                      className="block px-4 py-2 text-black text-center rounded-b-lg hover:bg-sand transition-colors"
-                    >
-                      Register
-                    </Link>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
-            {isAuthenticated && (
+            </span>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-1">
+            {["Home", "Menu", "Events", "Chefs", "Reviews"].map((item) => (
+              <Link
+                key={item}
+                to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
+                className={`px-3 py-2 rounded-lg text-black hover:bg-olive/10 transition-colors ${
+                  location.pathname === (item === "Home" ? "/" : `/${item.toLowerCase()}`)
+                    ? "font-semibold text-olive bg-olive/10"
+                    : ""
+                }`}
+              >
+                {item}
+              </Link>
+            ))}
+            <Link
+              to="/chatbot"
+              className={`px-3 py-2 rounded-lg text-black hover:bg-olive/10 transition-colors ${
+                location.pathname === "/chatbot" ? "font-semibold text-olive bg-olive/10" : ""
+              }`}
+            >
+              AI Assistance
+            </Link>
+
+            {isAuthenticated ? (
               <button
                 onClick={handleLogout}
-                className="ml-4 text-olive hover:text-black transition-colors"
+                className="ml-2 px-4 py-2 bg-olive hover:bg-black text-sand rounded-lg flex items-center gap-2 transition-colors"
               >
-                Logout
+                <LogOut size={18} />
+                <span>Logout</span>
               </button>
+            ) : (
+              <div className="relative">
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="ml-2 px-4 py-2 bg-olive hover:bg-black text-sand rounded-lg flex items-center gap-2 transition-colors"
+                >
+                  <User size={18} />
+                  <span>Account</span>
+                </button>
+                <AnimatePresence>
+                  {isDropdownOpen && (
+                    <motion.div
+                      className="absolute right-0 mt-2 w-48 bg-beige rounded-lg shadow-xl border border-olive overflow-hidden z-50"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Link
+                        to="/login"
+                        className="block w-full text-left px-4 py-3 text-black hover:bg-sand border-b border-olive transition-colors"
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        to="/register"
+                        className="block w-full text-left px-4 py-3 text-black hover:bg-sand transition-colors"
+                      >
+                        Register
+                      </Link>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             )}
           </nav>
+
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="md:hidden p-2 rounded-lg text-olive hover:bg-olive/10 transition-colors"
+          >
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
         </div>
-      </motion.header>
-    </>
+
+        {/* Mobile Navigation */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.nav
+              className="md:hidden mt-4 rounded-lg border border-olive overflow-hidden bg-beige/95"
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              {["Home", "Menu", "Events", "Chefs", "Reviews", "AI Assistance"].map((item) => (
+                <Link
+                  key={item}
+                  to={item === "Home"
+                    ? "/"
+                    : item === "AI Assistance"
+                      ? "/chatbot"
+                      : `/${item.toLowerCase()}`
+                  }
+                  className="block py-3 px-4 text-black hover:bg-olive/10 border-b border-olive/30 transition-colors"
+                >
+                  {item}
+                </Link>
+              ))}
+
+              {isAuthenticated ? (
+                <button
+                  onClick={handleLogout}
+                  className="w-full text-left py-3 px-4 text-olive hover:bg-olive/10 transition-colors flex items-center gap-2"
+                >
+                  <LogOut size={18} />
+                  <span>Logout</span>
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="block py-3 px-4 text-black hover:bg-olive/10 border-b border-olive/30 transition-colors"
+                  >
+                    Login
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="block py-3 px-4 text-black hover:bg-olive/10 transition-colors"
+                  >
+                    Register
+                  </Link>
+                </>
+              )}
+            </motion.nav>
+          )}
+        </AnimatePresence>
+      </div>
+    </motion.header>
   );
 }
 
