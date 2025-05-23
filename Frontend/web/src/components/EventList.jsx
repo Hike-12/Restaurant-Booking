@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { Calendar, Users, QrCode, ArrowRight } from "lucide-react";
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
@@ -55,30 +56,36 @@ const EventList = () => {
                 <h3 className="font-bold text-2xl text-black mb-2">
                   {event.type}
                 </h3>
-                <div className="flex justify-between items-center mb-2">
-                  <p className="text-olive font-semibold">
+                <div className="flex justify-between items-center mb-4">
+                  <p className="text-olive font-semibold flex items-center">
+                    <Calendar size={16} className="mr-1" />
                     Available:{" "}
-                    <span className="text-black">
+                    <span className="text-black ml-1">
                       {event.bookings_available}
                     </span>
                   </p>
-                  <p className="text-olive font-semibold">
+                  <p className="text-olive font-semibold flex items-center">
+                    <Users size={16} className="mr-1" />
                     Left:{" "}
-                    <span className="text-black">{event.bookings_left}</span>
+                    <span className="text-black ml-1">{event.bookings_left}</span>
                   </p>
                 </div>
                 <div className="flex justify-center mb-4">
-                  <img
-                    src={`http://127.0.0.1:8000${event.qr_code}`}
-                    alt={`QR Code for ${event.type}`}
-                    className="w-28 h-28 object-cover border-2 border-olive rounded-xl"
-                  />
+                  <div className="relative">
+                    <QrCode size={18} className="absolute top-0 left-0 text-olive m-2" />
+                    <img
+                      src={`http://127.0.0.1:8000${event.qr_code}`}
+                      alt={`QR Code for ${event.type}`}
+                      className="w-28 h-28 object-cover border-2 border-olive rounded-xl"
+                    />
+                  </div>
                 </div>
                 <button
                   onClick={() => handleEventClick(event.id)}
                   className="mt-2 w-full bg-olive text-sand px-4 py-2 rounded-lg hover:bg-black hover:text-beige transition-colors flex items-center justify-center font-semibold"
                 >
                   See More
+                  <ArrowRight size={16} className="ml-2" />
                 </button>
               </div>
             </motion.div>

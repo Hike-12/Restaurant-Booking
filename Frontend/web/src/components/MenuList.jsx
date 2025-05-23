@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { Coffee, DollarSign, Flame, UtensilsCrossed } from "lucide-react";
 
 const MenuList = () => {
   const [menus, setMenus] = useState([]);
@@ -26,7 +27,8 @@ const MenuList = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <h2 className="text-4xl font-extrabold text-center text-olive mb-10 tracking-tight">
+        <h2 className="text-4xl font-extrabold text-center text-olive mb-10 tracking-tight flex items-center justify-center">
+          <Coffee size={32} className="mr-3" />
           Our Menu
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -37,6 +39,7 @@ const MenuList = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.07, duration: 0.5, ease: "easeOut" }}
+              whileHover={{ scale: 1.02 }}
             >
               <div className="relative">
                 <img
@@ -44,23 +47,26 @@ const MenuList = () => {
                   alt={menu.item}
                   className="w-full h-56 object-cover rounded-t-3xl"
                 />
-                <div className="absolute top-4 right-4 bg-olive text-sand px-3 py-1 rounded-full text-xs font-semibold shadow">
+                <div className="absolute top-4 right-4 bg-olive text-sand px-3 py-1 rounded-full text-xs font-semibold shadow flex items-center">
+                  <DollarSign size={14} className="mr-1" />
                   Rs.{menu.cost}
                 </div>
               </div>
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="font-bold text-2xl text-black mb-2 group-hover:text-olive transition-colors">
+                <h3 className="font-bold text-2xl text-black mb-3 group-hover:text-olive transition-colors">
                   {menu.item}
                 </h3>
-                <p className="text-olive font-semibold mb-2">
+                <p className="text-olive font-semibold mb-2 flex items-center">
+                  <Flame size={16} className="mr-2" />
                   Calories:{" "}
-                  <span className="text-black">{menu.calories} kcal</span>
+                  <span className="text-black ml-1">{menu.calories} kcal</span>
                 </p>
                 <p className="text-black text-base mb-4 flex-1">
                   {menu.description}
                 </p>
                 <div className="flex justify-end">
-                  <span className="inline-block bg-olive text-sand px-4 py-1 rounded-full text-xs font-medium shadow">
+                  <span className="inline-block bg-olive text-sand px-4 py-1 rounded-full text-xs font-medium shadow flex items-center">
+                    <UtensilsCrossed size={14} className="mr-1" />
                     {menu.category || "Special"}
                   </span>
                 </div>

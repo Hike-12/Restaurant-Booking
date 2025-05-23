@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { Calendar, Clock, Users } from "lucide-react";
+import { Calendar, Clock, Users, CalendarCheck, AlertCircle, Loader } from "lucide-react";
 import UserEvents from "./UserEvents";
 import { motion } from "framer-motion";
 
@@ -15,6 +15,7 @@ const getCsrfToken = () => {
 const EventScheduleList = () => {
   const [schedules, setSchedules] = useState([]);
   const [registrationStatus, setRegistrationStatus] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
   const query = new URLSearchParams(useLocation().search);
   const eventId = query.get("eventId");
 
@@ -35,6 +36,7 @@ const EventScheduleList = () => {
 
   // Register for an event schedule
   const registerForEventSchedule = async (scheduleId) => {
+    setIsLoading(true);
     try {
       const response = await fetch(
         `http://127.0.0.1:8000/api/event-schedules/${scheduleId}/register/`,
@@ -57,6 +59,8 @@ const EventScheduleList = () => {
     } catch (error) {
       console.error("Error registering for event schedule:", error);
       setRegistrationStatus("An error occurred during registration.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -73,14 +77,25 @@ const EventScheduleList = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h2 className="text-4xl text-center font-extrabold text-olive mb-10 tracking-tight">
+          <h2 className="text-4xl text-center font-extrabold text-olive mb-10 tracking-tight flex items-center justify-center">
+            <Calendar className="mr-3" size={32} />
             Event Schedule
           </h2>
+          
           {registrationStatus && (
-            <p className="text-center text-olive mt-2">
-              {registrationStatus}
-            </p>
+            <motion.div 
+              className="mb-8 bg-beige p-4 rounded-xl border border-olive text-center"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <p className="text-center text-black flex items-center justify-center">
+                <AlertCircle className="mr-2 text-olive" size={18} />
+                {registrationStatus}
+              </p>
+            </motion.div>
           )}
+          
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
             {schedules.map((schedule, idx) => (
               <motion.div
@@ -91,25 +106,39 @@ const EventScheduleList = () => {
                 transition={{ delay: idx * 0.07, duration: 0.5, ease: "easeOut" }}
               >
                 <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="font-bold text-2xl text-black mb-2">{schedule.event}</h3>
-                  <div className="space-y-2 mb-4">
+                  <h3 className="font-bold text-2xl text-black mb-4">{schedule.event}</h3>
+                  <div className="space-y-3 mb-6">
                     <p className="text-olive flex items-center">
-                      <Calendar className="mr-2 h-4 w-4" /> {schedule.date}
+                      <Calendar className="mr-2 h-5 w-5" /> 
+                      <span className="text-black">{schedule.date}</span>
                     </p>
                     <p className="text-olive flex items-center">
-                      <Clock className="mr-2 h-4 w-4" /> {schedule.time}
+                      <Clock className="mr-2 h-5 w-5" /> 
+                      <span className="text-black">{schedule.time}</span>
                     </p>
                     <p className="text-olive flex items-center">
-                      <Users className="mr-2 h-4 w-4" /> Available:{" "}
-                      <span className="text-black">{schedule.bookings_available}</span>, Left:{" "}
-                      <span className="text-black">{schedule.bookings_left}</span>
+                      <Users className="mr-2 h-5 w-5" /> 
+                      <span className="text-black">
+                        {schedule.bookings_available} spots available, {schedule.bookings_left} left
+                      </span>
                     </p>
                   </div>
                   <button
                     onClick={() => registerForEventSchedule(schedule.id)}
-                    className="w-full bg-olive text-sand px-4 py-2 rounded-lg hover:bg-black hover:text-beige transition-colors font-semibold"
+                    disabled={isLoading}
+                    className="w-full bg-olive text-sand px-4 py-3 rounded-lg hover:bg-black hover:text-beige transition-colors font-semibold flex items-center justify-center"
                   >
-                    Register
+                    {isLoading ? (
+                      <>
+                        <Loader size={18} className="mr-2 animate-spin" />
+                        Registering...
+                      </>
+                    ) : (
+                      <>
+                        <CalendarCheck size={18} className="mr-2" />
+                        Register
+                      </>
+                    )}
                   </button>
                 </div>
               </motion.div>

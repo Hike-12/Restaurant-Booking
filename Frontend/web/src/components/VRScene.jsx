@@ -2,7 +2,7 @@ import React from 'react';
 import 'aframe';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowLeft, Monitor } from "lucide-react"; // Changed to a definitely available icon
+import { ArrowLeft, Video } from "lucide-react";
 
 const VRScene = () => {
   return (
@@ -22,7 +22,7 @@ const VRScene = () => {
             Back to Home
           </Link>
           <div className="flex items-center text-black">
-            <Monitor size={24} className="mr-2 text-olive" /> {/* Changed from Cube to Monitor */}
+            <Video size={24} className="mr-2 text-olive" />
             <span className="font-semibold">360° Virtual Tour</span>
           </div>
         </div>

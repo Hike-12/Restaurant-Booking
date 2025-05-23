@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { Star } from "lucide-react";
+import { Star, Send } from "lucide-react";
+import { motion } from "framer-motion";
 
 const AddReview = () => {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
 
     const reviewData = {
       user_id: 1, // Replace with dynamic user ID in production
@@ -25,44 +29,80 @@ const AddReview = () => {
 
       const result = await response.json();
       console.log("Review added:", result);
-      // Reset form or show success message
+      setSuccess(true);
+      setComment("");
+
+      // Reset success message after 3 seconds
+      setTimeout(() => setSuccess(false), 3000);
     } catch (error) {
       console.error("Error adding review:", error);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <form
+    <motion.form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto bg-beige p-8 rounded-2xl shadow-xl border-2 border-olive"
+      className="max-w-md mx-auto bg-beige p-8 rounded-2xl shadow-xl border-2 border-olive relative overflow-hidden"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
     >
-      <h3 className="text-2xl font-bold mb-4 text-olive">
+      {success && (
+        <motion.div
+          className="absolute inset-0 bg-olive flex items-center justify-center text-sand text-lg font-semibold"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        >
+          Review submitted successfully!
+        </motion.div>
+      )}
+
+      <h3 className="text-2xl font-bold mb-6 text-olive flex items-center">
+        <Star className="mr-2 text-yellow-500" size={24} />
         Submit Your Review
       </h3>
-      <div className="mb-4">
+
+      <div className="mb-5">
         <label
-          className="block text-black text-sm font-bold mb-2"
+          className="block text-black text-sm font-bold mb-3"
           htmlFor="rating"
         >
           Rating:
         </label>
-        <div className="flex items-center">
+        <div className="flex items-center bg-sand p-3 rounded-lg border border-olive">
           <input
             id="rating"
-            type="number"
+            type="range"
             min="1"
             max="5"
             value={rating}
             onChange={(e) => setRating(e.target.value)}
-            className="shadow appearance-none border border-olive rounded w-16 py-2 px-3 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand"
+            className="flex-grow mr-3 accent-olive"
           />
-          <Star className="w-5 h-5 text-yellow-500 ml-2" />
-          <span className="text-olive ml-1">/ 5</span>
+          <div className="flex items-center gap-1">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                size={18}
+                className={
+                  i < rating
+                    ? "fill-yellow-500 text-yellow-500"
+                    : "text-gray-300"
+                }
+                onClick={() => setRating(i + 1)}
+              />
+            ))}
+          </div>
+          <span className="text-olive ml-2 font-semibold">{rating}/5</span>
         </div>
       </div>
+
       <div className="mb-6">
         <label
-          className="block text-black text-sm font-bold mb-2"
+          className="block text-black text-sm font-bold mb-3"
           htmlFor="comment"
         >
           Comment:
@@ -71,19 +111,28 @@ const AddReview = () => {
           id="comment"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          className="shadow appearance-none border border-olive rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand h-32"
-          placeholder="Write your review here..."
+          className="shadow appearance-none border border-olive rounded-lg w-full py-3 px-4 text-black leading-relaxed focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand h-32 resize-none"
+          placeholder="Share your experience with us..."
         />
       </div>
+
       <div className="flex items-center justify-end">
         <button
           type="submit"
-          className="bg-olive hover:bg-black text-sand font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-olive transition-colors duration-300"
+          disabled={isSubmitting}
+          className="bg-olive hover:bg-black text-sand font-bold py-3 px-6 rounded-lg focus:outline-none focus:ring-2 focus:ring-olive transition-colors duration-300 flex items-center"
         >
-          Submit Review
+          {isSubmitting ? (
+            "Submitting..."
+          ) : (
+            <>
+              Submit Review
+              <Send size={16} className="ml-2" />
+            </>
+          )}
         </button>
       </div>
-    </form>
+    </motion.form>
   );
 };
 
