@@ -48,7 +48,7 @@ const Login = () => {
     <>
       <div className="relative w-full h-screen flex items-center justify-center bg-sand">
         {/* Background Image Container */}
-        <div className="absolute inset-0 bg-[url('./assets/login_bg.jpg')] bg-cover bg-center filter blur-sm opacity-30"></div>
+        <div className="absolute inset-0 bg-[url('/background.jpg')] bg-cover bg-center filter blur-sm"></div>
 
         {/* Content Container */}
         <motion.div

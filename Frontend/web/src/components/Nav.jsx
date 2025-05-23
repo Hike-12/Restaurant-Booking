@@ -111,7 +111,7 @@ function Nav() {
                   className="ml-2 px-4 py-2 bg-olive hover:bg-black text-sand rounded-lg flex items-center gap-2 transition-colors"
                 >
                   <User size={18} />
-                  <span>Account</span>
+                  <span>Sign Up</span>
                 </button>
                 <AnimatePresence>
                   {isDropdownOpen && (

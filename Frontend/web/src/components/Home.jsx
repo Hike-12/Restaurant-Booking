@@ -5,7 +5,7 @@ import { UtensilsCrossed, Video } from "lucide-react";
 
 const Home = () => {
   return (
-    <section className="body-font min-h-screen w-full flex flex-col bg-sand">
+    <section className="body-font min-h-screen w-full flex flex-col bg-sand bg-[url('/background.jpg')] bg-cover bg-center bg-no-repeat">
       <motion.div
         className="flex-grow flex flex-col items-center justify-center px-4 py-16"
         initial={{ opacity: 0, y: 40 }}
