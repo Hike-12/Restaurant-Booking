@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 
 function Nav() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -51,75 +52,102 @@ function Nav() {
 
   return (
     <>
-      <header className="body-font z-10">
-        <div className="container mx-0 flex flex-wrap p-6 px-14 flex-col md:flex-row items-center backdrop-blur-3xl text-orange1 bg-blend-color relative z-20">
-        <div className="mb-0 flex flex-row items-center gap-2">
-          <img src="src\assets\logo.jpg" alt="Ettarra Logo" className="w-20 h-20" />
-          <p className="text-3xl">Ettarra</p>
-        </div>
-          
-          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center justify-center navbar text-base">
-            <Link to="/" className="mr-12 hover:text-orange6">
+      <motion.header
+        className="body-font z-10"
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
+        <div className="container mx-auto flex flex-wrap p-4 px-8 flex-col md:flex-row items-center bg-beige/80 shadow-lg rounded-b-2xl border-b-4 border-olive">
+          <div className="flex flex-row items-center gap-3">
+            <img
+              src="src/assets/logo.jpg"
+              alt="Ettarra Logo"
+              className="w-16 h-16 rounded-full border-2 border-olive shadow"
+            />
+            <p className="text-3xl font-bold text-olive tracking-wide">
+              Ettarra
+            </p>
+          </div>
+          <nav className="md:ml-auto md:mr-auto flex flex-wrap items-center justify-center navbar text-lg font-medium gap-2">
+            <Link
+              to="/"
+              className="mx-4 hover:text-olive transition-colors"
+            >
               Home
             </Link>
-            <Link to="/menus" className="mr-12 hover:text-orange6">
+            <Link
+              to="/menus"
+              className="mx-4 hover:text-olive transition-colors"
+            >
               Menu
             </Link>
-            <Link to="/events" className="mr-12 hover:text-orange6">
+            <Link
+              to="/events"
+              className="mx-4 hover:text-olive transition-colors"
+            >
               Events
             </Link>
-            <Link to="/chefs" className="mr-12 hover:text-orange6">
+            <Link
+              to="/chefs"
+              className="mx-4 hover:text-olive transition-colors"
+            >
               Chefs
             </Link>
-            <Link to="/chatbot" className="mr-12 hover:text-orange6">
+            <Link
+              to="/chatbot"
+              className="mx-4 hover:text-olive transition-colors"
+            >
               AI Assistance
             </Link>
-            <Link to="/reviews" className="mr-12 hover:text-orange6">
+            <Link
+              to="/reviews"
+              className="mx-4 hover:text-olive transition-colors"
+            >
               Reviews
             </Link>
-    
-
-            {/* Dropdown for Login/Register */}
             <div className="relative">
               <button
                 onClick={toggleDropdown}
-                className={`mr-3 hover:bg-orange10 ml-2 bg-orange9 px-6 py-2 rounded-md focus:outline-none ${
-                  isAuthenticated ? "" : "text-base"
-                }`}
+                className={`ml-4 bg-olive text-sand px-6 py-2 rounded-lg shadow hover:bg-black hover:text-beige transition-colors focus:outline-none`}
               >
                 {isAuthenticated ? "Account" : "Login/Sign Up"}
               </button>
-              {!isAuthenticated && isDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-36 bg-orange2 shadow-lg rounded-md z-30">
-                  {" "}
-                  {/* Higher z-index */}
-                  <Link
-                    to="/login"
-                    className="block px-4 py-2 text-orange12 text-center rounded-md hover:bg-orange4 border-b-2 border-orange5"
+              <AnimatePresence>
+                {!isAuthenticated && isDropdownOpen && (
+                  <motion.div
+                    className="absolute right-0 mt-2 w-40 bg-beige shadow-xl rounded-lg z-30 border border-olive"
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
                   >
-                    Login
-                  </Link>
-                  <Link
-                    to="/register"
-                    className="block px-4 py-2 text-orange12 text-center rounded-md hover:bg-orange4 border-b-2 border-orange5"
-                  >
-                    Register
-                  </Link>
-                </div>
-              )}
+                    <Link
+                      to="/login"
+                      className="block px-4 py-2 text-black text-center rounded-t-lg hover:bg-sand border-b border-olive transition-colors"
+                    >
+                      Login
+                    </Link>
+                    <Link
+                      to="/register"
+                      className="block px-4 py-2 text-black text-center rounded-b-lg hover:bg-sand transition-colors"
+                    >
+                      Register
+                    </Link>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
-
             {isAuthenticated && (
               <button
                 onClick={handleLogout}
-                className="mr-12 hover:text-orange6"
+                className="ml-4 text-olive hover:text-black transition-colors"
               >
                 Logout
               </button>
             )}
           </nav>
         </div>
-      </header>
+      </motion.header>
     </>
   );
 }

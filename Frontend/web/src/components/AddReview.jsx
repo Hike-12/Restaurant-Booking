@@ -34,14 +34,14 @@ const AddReview = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md"
+      className="max-w-md mx-auto bg-beige p-8 rounded-2xl shadow-xl border-2 border-olive"
     >
-      <h3 className="text-xl font-semibold mb-4 text-gray-800">
+      <h3 className="text-2xl font-bold mb-4 text-olive">
         Submit Your Review
       </h3>
       <div className="mb-4">
         <label
-          className="block text-gray-700 text-sm font-bold mb-2"
+          className="block text-black text-sm font-bold mb-2"
           htmlFor="rating"
         >
           Rating:
@@ -54,15 +54,15 @@ const AddReview = () => {
             max="5"
             value={rating}
             onChange={(e) => setRating(e.target.value)}
-            className="shadow appearance-none border rounded w-16 py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+            className="shadow appearance-none border border-olive rounded w-16 py-2 px-3 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand"
           />
           <Star className="w-5 h-5 text-yellow-500 ml-2" />
-          <span className="text-gray-600 ml-1">/ 5</span>
+          <span className="text-olive ml-1">/ 5</span>
         </div>
       </div>
       <div className="mb-6">
         <label
-          className="block text-gray-700 text-sm font-bold mb-2"
+          className="block text-black text-sm font-bold mb-2"
           htmlFor="comment"
         >
           Comment:
@@ -71,14 +71,14 @@ const AddReview = () => {
           id="comment"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-          className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline h-32"
+          className="shadow appearance-none border border-olive rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand h-32"
           placeholder="Write your review here..."
         />
       </div>
       <div className="flex items-center justify-end">
         <button
           type="submit"
-          className="bg-amber-500 hover:bg-amber-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition-colors duration-300"
+          className="bg-olive hover:bg-black text-sand font-bold py-2 px-6 rounded focus:outline-none focus:ring-2 focus:ring-olive transition-colors duration-300"
         >
           Submit Review
         </button>

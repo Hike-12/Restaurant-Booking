@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -45,13 +46,18 @@ const Login = () => {
 
   return (
     <>
-      <div className="relative w-full h-screen flex items-center justify-center">
+      <div className="relative w-full h-screen flex items-center justify-center bg-sand">
         {/* Background Image Container */}
-        <div className="absolute inset-0 bg-[url('./assets/login_bg.jpg')] bg-cover bg-center filter blur-sm"></div>
+        <div className="absolute inset-0 bg-[url('./assets/login_bg.jpg')] bg-cover bg-center filter blur-sm opacity-30"></div>
 
         {/* Content Container */}
-        <div className="relative bg-orange2 shadow-lg rounded-lg p-10 max-w-sm w-full backdrop-blur-sm">
-          <h2 className="text-3xl font-bold mb-6 text-center text-orange12">
+        <motion.div
+          className="relative bg-beige/95 shadow-2xl rounded-2xl p-10 max-w-sm w-full border-2 border-olive"
+          initial={{ opacity: 0, scale: 0.95, y: 40 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h2 className="text-3xl font-bold mb-6 text-center text-olive">
             Login
           </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -62,7 +68,7 @@ const Login = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="shadow appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 text-gray-800 leading-tight focus:outline-none focus:ring-2 focus:ring-orange8 focus:border-orange8"
+                className="shadow appearance-none border border-olive rounded-lg w-full py-3 px-4 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand"
               />
             </div>
             <div>
@@ -72,14 +78,14 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="shadow appearance-none border border-gray-300 rounded-lg w-full py-3 px-4 text-gray-800 mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-orange8 focus:border-orange8"
+                className="shadow appearance-none border border-olive rounded-lg w-full py-3 px-4 text-black mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand"
               />
             </div>
             <div>
               <button
                 type="submit"
                 disabled={isLoading}
-                className={`bg-orange9 hover:bg-orange10 text-white font-bold py-3 px-4 rounded-lg w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-orange8 ${
+                className={`bg-olive hover:bg-black text-sand font-bold py-3 px-4 rounded-lg w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-olive ${
                   isLoading ? "opacity-50 cursor-not-allowed" : ""
                 }`}
               >
@@ -88,7 +94,7 @@ const Login = () => {
             </div>
           </form>
           {error && <p className="text-red-500 text-xs italic mt-4">{error}</p>}
-        </div>
+        </motion.div>
       </div>
     </>
   );

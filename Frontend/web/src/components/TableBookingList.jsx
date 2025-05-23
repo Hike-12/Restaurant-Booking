@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Calendar } from "lucide-react";
+import { motion } from "framer-motion";
 
 const TableBookingList = () => {
   const [bookings, setBookings] = useState([]);
@@ -127,29 +128,45 @@ const TableBookingList = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-orange12 p-4">
-      <div className="w-full max-w-3xl bg-orange2 rounded-lg shadow-md overflow-hidden">
-        <div className="p-6">
-          <h2 className="text-2xl font-bold text-center mb-4">Table Booking</h2>
+    <motion.div
+      className="flex items-center justify-center min-h-screen bg-sand p-4"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
+      <motion.div
+        className="w-full max-w-3xl bg-beige rounded-3xl shadow-xl border-2 border-olive overflow-hidden"
+        initial={{ opacity: 0, scale: 0.97 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.5, ease: "easeOut" }}
+      >
+        <div className="p-8">
+          <h2 className="text-3xl font-bold text-center mb-6 text-olive">
+            Table Booking
+          </h2>
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
-              <label className="block text-base font-medium mb-1">Date:</label>
+              <label className="block text-base font-medium mb-1 text-black">
+                Date:
+              </label>
               <div className="relative">
-                <Calendar className="absolute top-2.5 left-2 text-gray-400 w-4 h-4" />
+                <Calendar className="absolute top-2.5 left-2 text-olive w-4 h-4" />
                 <input
                   type="date"
                   value={bookingDate}
                   onChange={(e) => setBookingDate(e.target.value)}
-                  className="pl-8 p-2 text-sm border border-gray-300 rounded w-full"
+                  className="pl-8 p-2 text-sm border border-olive rounded w-full bg-sand text-black focus:outline-none focus:ring-2 focus:ring-olive"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-base font-medium mb-1">Time:</label>
+              <label className="block text-base font-medium mb-1 text-black">
+                Time:
+              </label>
               <select
                 value={bookingTime}
                 onChange={(e) => setBookingTime(e.target.value)}
-                className="p-2 text-sm border border-gray-300 rounded w-full"
+                className="p-2 text-sm border border-olive rounded w-full bg-sand text-black focus:outline-none focus:ring-2 focus:ring-olive"
               >
                 <option value="">Select</option>
                 {timeOptions.map((time) => (
@@ -161,21 +178,29 @@ const TableBookingList = () => {
             </div>
           </div>
 
-          <div className="relative bg-orange2 w-full h-96 border-2 border-orange7 rounded-lg overflow-scroll">
+          <div className="relative bg-beige w-full h-96 border-2 border-olive rounded-lg overflow-scroll">
             <div className="grid grid-cols-5 gap-2 mt-16 mx-2 pt-4 px-3">
               {bookings.map((booking) => (
                 <div
                   key={booking.table_id}
                   onClick={() => handleTableClick(booking.table_id)}
-                  className={`w-20 h-20 rounded-lg flex items-center mb-2 justify-center cursor-pointer ${
+                  className={`w-20 h-20 rounded-lg flex items-center mb-2 justify-center cursor-pointer transition-colors duration-200 ${
                     booking.status
                       ? "bg-red-500"
                       : selectedTables.includes(booking.table_id)
                       ? "bg-green-500"
-                      : "bg-gray-300 hover:bg-gray-400"
+                      : "bg-sand hover:bg-olive hover:text-sand"
                   }`}
                 >
-                  <span className="text-white font-bold">{booking.table_id}</span>
+                  <span
+                    className={`font-bold ${
+                      booking.status || selectedTables.includes(booking.table_id)
+                        ? "text-sand"
+                        : "text-black"
+                    }`}
+                  >
+                    {booking.table_id}
+                  </span>
                 </div>
               ))}
             </div>
@@ -184,21 +209,21 @@ const TableBookingList = () => {
           <div className="mt-6 flex justify-between items-center">
             <div className="flex items-center space-x-4">
               <div className="flex items-center">
-                <div className="w-4 h-4 bg-gray-300 rounded-full mr-2"></div>
-                <span className="text-sm">Available</span>
+                <div className="w-4 h-4 bg-sand border border-olive rounded-full mr-2"></div>
+                <span className="text-sm text-black">Available</span>
               </div>
               <div className="flex items-center">
                 <div className="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
-                <span className="text-sm">Booked</span>
+                <span className="text-sm text-black">Booked</span>
               </div>
               <div className="flex items-center">
                 <div className="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
-                <span className="text-sm">Selected</span>
+                <span className="text-sm text-black">Selected</span>
               </div>
             </div>
             <button
               onClick={handleBooking}
-              className="bg-orange9 text-orange2 px-4 py-2 rounded text-sm font-medium hover:bg-orange10 disabled:bg-gray-400"
+              className="bg-olive text-sand px-4 py-2 rounded text-sm font-medium hover:bg-black hover:text-beige disabled:bg-gray-400 transition-colors"
               disabled={
                 selectedTables.length === 0 || !bookingDate || !bookingTime
               }
@@ -208,13 +233,13 @@ const TableBookingList = () => {
           </div>
         </div>
         <div className="p-4">
-          <p className="text-base">
+          <p className="text-base text-black">
             <span className="font-bold">Note: </span>To Cancel Booking Please
             Call On +91 98256 03145
           </p>
         </div>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

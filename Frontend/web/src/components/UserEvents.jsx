@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Calendar, Users, CheckCircle, AlertCircle, X,Clock } from "lucide-react";
+import { Calendar, Users, CheckCircle, AlertCircle, X, Clock } from "lucide-react";
+import { motion } from "framer-motion";
 
 const UserEvents = () => {
   const [events, setEvents] = useState([]);
@@ -76,74 +77,84 @@ const UserEvents = () => {
   }
 
   return (
-    <>
-      <hr className="border-amber-800"></hr>
-      <div className="container mx-auto px-4 py-8 bg-gradient-to-b from-amber-300 to-amber-100">
-        <h2 className="text-2xl text-center font-bold mb-4 text-amber-900">
+    <motion.div
+      className="w-full px-0 py-12 bg-sand"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
+      <div className="container mx-auto px-4 py-8">
+        <h2 className="text-3xl text-center font-bold mb-8 text-olive">
           Your Registered Events
         </h2>
-        <ul className="grid pt-10 px-10 grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-6">
+        <ul className="grid pt-4 px-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
           {events.length > 0 ? (
             events.map((event, index) => (
-              <li
+              <motion.li
                 key={index}
-                className="bg-white rounded-lg shadow-md overflow-hidden"
+                className="bg-beige rounded-3xl shadow-xl border-2 border-olive p-7 flex flex-col transition-transform hover:-translate-y-2 hover:shadow-2xl duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: index * 0.07,
+                  duration: 0.5,
+                  ease: "easeOut",
+                }}
               >
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold mb-3">
-                    {event.event_type}
-                  </h3>
-                  <div className="space-y-2 text-sm">
-                    <p className="flex items-center text-gray-600">
-                      <Calendar size={16} className="mr-2" />
-                      {new Date(event.event_date).toLocaleString()}
+                <h3 className="text-2xl font-bold mb-3 text-black">
+                  {event.event_type}
+                </h3>
+                <div className="space-y-2 text-base mb-4">
+                  <p className="flex items-center text-olive">
+                    <Calendar size={18} className="mr-2" />
+                    {new Date(event.event_date).toLocaleString()}
+                  </p>
+                  <p className="flex items-center text-olive">
+                    <Users size={18} className="mr-2" />
+                    <span className="text-black">{event.bookings_left}</span> /{" "}
+                    <span className="text-black">{event.bookings_available}</span>{" "}
+                    spots left
+                  </p>
+                  {event.is_in_queue ? (
+                    <p className="flex items-center text-yellow-700">
+                      <AlertCircle size={18} className="mr-2" />
+                      You are on the waitlist
                     </p>
-                    <p className="flex items-center text-gray-600">
-                      <Users size={16} className="mr-2" />
-                      {event.bookings_left} / {event.bookings_available} spots
-                      left
+                  ) : (
+                    <p className="flex items-center text-green-700">
+                      <CheckCircle size={18} className="mr-2" />
+                      You are confirmed
                     </p>
-                    {event.is_in_queue ? (
-                      <p className="flex items-center text-amber-600">
-                        <AlertCircle size={16} className="mr-2" />
-                        You are on the waitlist
-                      </p>
-                    ) : (
-                      <p className="flex items-center text-green-600">
-                        <CheckCircle size={16} className="mr-2" />
-                        You are confirmed
-                      </p>
-                    )}
-                  </div>
-                  <div className="mt-4 space-y-2">
-                    {event.is_in_queue && (
-                      <button
-                        onClick={() => getQueuePosition(event.id)}
-                        className="w-full px-4 py-2 bg-amber-500 text-white rounded flex items-center justify-center hover:bg-amber-600 transition-colors duration-300"
-                      >
-                        <Clock size={16} className="mr-2" />
-                        Check Queue Position
-                      </button>
-                    )}
-                    <button
-                      onClick={() => cancelEvent(event.id)}
-                      className="w-full px-4 py-2 bg-red-500 text-white rounded flex items-center justify-center hover:bg-red-600 transition-colors duration-300"
-                    >
-                      <X size={16} className="mr-2" />
-                      Cancel Registration
-                    </button>
-                  </div>
+                  )}
                 </div>
-              </li>
+                <div className="mt-4 space-y-2">
+                  {event.is_in_queue && (
+                    <button
+                      onClick={() => getQueuePosition(event.id)}
+                      className="w-full px-4 py-2 bg-olive text-sand rounded-lg flex items-center justify-center hover:bg-black hover:text-beige transition-colors duration-300"
+                    >
+                      <Clock size={18} className="mr-2" />
+                      Check Queue Position
+                    </button>
+                  )}
+                  <button
+                    onClick={() => cancelEvent(event.id)}
+                    className="w-full px-4 py-2 bg-red-500 text-white rounded-lg flex items-center justify-center hover:bg-red-700 transition-colors duration-300"
+                  >
+                    <X size={18} className="mr-2" />
+                    Cancel Registration
+                  </button>
+                </div>
+              </motion.li>
             ))
           ) : (
-            <p className="text-gray-600 col-span-full">
+            <p className="text-olive col-span-full">
               You haven't registered for any events yet.
             </p>
           )}
         </ul>
       </div>
-    </>
+    </motion.div>
   );
 };
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import AddReview from "./AddReview";
-import Nav from "./Nav";
 import { Star, Calendar } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -21,45 +21,57 @@ const Reviews = () => {
   }, []);
 
   return (
-    <div className="flex flex-col px-10 py-8 bg-gradient-to-b from-amber-100 to-amber-300">
-      <h2 className="text-3xl font-bold mt-2 text-center text-amber-900">
-        Customer Reviews
-      </h2>
-      <div className="my-12">
-        <AddReview />
-      </div>
-      <div className="my-10">
-        <hr className="border-amber-800"></hr>
-        <br />
-        <h2 className="text-center font-bold text-3xl text-amber-900">
-          Reviews from our customers
+    <div className="flex flex-col px-4 py-12 min-h-screen bg-sand">
+      <motion.div
+        className="max-w-5xl mx-auto w-full"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
+        <h2 className="text-4xl font-extrabold mt-2 text-center text-olive mb-10 tracking-tight">
+          Customer Reviews
         </h2>
-      </div>
-      {reviews.length > 0 ? (
-        <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {reviews.map((review, index) => (
-            <li
-              key={index}
-              className="bg-white rounded-lg shadow-md overflow-hidden p-6"
-            >
-              <div className="flex justify-between items-center mb-4">
-                <strong className="text-lg text-gray-800">{review.user}</strong>
-                <div className="flex items-center">
-                  <Star className="w-5 h-5 text-yellow-500 mr-1" />
-                  <span className="text-gray-600">{review.rating}/5</span>
+        <div className="my-8">
+          <AddReview />
+        </div>
+        <div className="my-10">
+          <hr className="border-olive" />
+          <br />
+          <h2 className="text-center font-bold text-3xl text-olive">
+            Reviews from our customers
+          </h2>
+        </div>
+        {reviews.length > 0 ? (
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {reviews.map((review, idx) => (
+              <motion.li
+                key={idx}
+                className="bg-beige rounded-3xl shadow-xl border-2 border-olive p-7 flex flex-col transition-transform hover:-translate-y-2 hover:shadow-2xl duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.07, duration: 0.5, ease: "easeOut" }}
+              >
+                <div className="flex justify-between items-center mb-4">
+                  <strong className="text-lg text-black">{review.user}</strong>
+                  <div className="flex items-center">
+                    <Star className="w-5 h-5 text-yellow-500 mr-1" />
+                    <span className="text-olive font-semibold">
+                      {review.rating}/5
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <p className="text-gray-600 mb-4">{review.comment}</p>
-              <div className="flex items-center text-sm text-gray-500">
-                <Calendar className="w-4 h-4 mr-2" />
-                <small>{new Date(review.created_at).toLocaleString()}</small>
-              </div>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p className="text-center text-gray-600">No reviews yet.</p>
-      )}
+                <p className="text-black mb-4 flex-1">{review.comment}</p>
+                <div className="flex items-center text-sm text-olive">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  <small>{new Date(review.created_at).toLocaleString()}</small>
+                </div>
+              </motion.li>
+            ))}
+          </ul>
+        ) : (
+          <p className="text-center text-olive">No reviews yet.</p>
+        )}
+      </motion.div>
     </div>
   );
 };

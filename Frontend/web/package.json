@@ -12,6 +12,7 @@
   "dependencies": {
     "aframe": "^1.6.0",
     "aframe-react": "^4.4.0",
+    "framer-motion": "^12.12.1",
     "lucide": "^0.452.0",
     "lucide-react": "^0.452.0",
     "postcss-cli": "^11.0.0",

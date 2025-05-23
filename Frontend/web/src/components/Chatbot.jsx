@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Send } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Chatbot = () => {
   const [userMessage, setUserMessage] = useState("");
@@ -72,12 +73,17 @@ const Chatbot = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-orange9 p-4">
-      <div className="w-1/2 mx-auto p-6 bg-white rounded-lg shadow-md ">
-        <h2 className="text-2xl text-center font-bold mb-4 text-amber-900">
+    <motion.div
+      className="flex items-center justify-center min-h-screen bg-olive p-4"
+      initial={{ opacity: 0, y: 40 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7, ease: "easeOut" }}
+    >
+      <div className="w-full max-w-xl mx-auto p-6 bg-beige rounded-2xl shadow-2xl border-2 border-olive">
+        <h2 className="text-2xl text-center font-bold mb-4 text-olive">
           Chatbot
         </h2>
-        <div className="h-80 overflow-y-auto border border-gray-200 rounded-lg p-4 mb-4 bg-orange2">
+        <div className="h-80 overflow-y-auto border border-olive rounded-lg p-4 mb-4 bg-sand">
           {chatHistory.map((chat, index) => (
             <div
               key={index}
@@ -88,11 +94,11 @@ const Chatbot = () => {
               <div
                 className={`inline-block max-w-[70%] p-2 rounded-lg ${
                   chat.sender === "user"
-                    ? "bg-amber-100 text-gray-800"
-                    : "bg-gray-100 text-gray-800"
+                    ? "bg-olive text-sand"
+                    : "bg-beige text-black"
                 }`}
               >
-                <strong className="text-xs text-gray-600">
+                <strong className="text-xs text-olive">
                   {chat.sender === "user" ? "You" : "Bot"}:
                 </strong>
                 <div
@@ -111,17 +117,17 @@ const Chatbot = () => {
             value={userMessage}
             onChange={(e) => setUserMessage(e.target.value)}
             placeholder="Type your message..."
-            className="flex-grow p-2 border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-amber-500"
+            className="flex-grow p-2 border border-olive rounded-l-lg focus:outline-none focus:ring-2 focus:ring-olive bg-sand text-black"
           />
           <button
             onClick={handleSendMessage}
-            className="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-r-lg transition-colors duration-300 flex items-center justify-center"
+            className="bg-olive hover:bg-black text-sand px-4 py-2 rounded-r-lg transition-colors duration-300 flex items-center justify-center"
           >
             <Send size={18} />
           </button>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

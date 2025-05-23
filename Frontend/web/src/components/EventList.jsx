@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const EventList = () => {
   const [events, setEvents] = useState([]);
-  const navigate = useNavigate(); // Initialize navigate for redirection
+  const navigate = useNavigate();
 
   // Fetch events from the backend
   const fetchEvents = async () => {
@@ -26,51 +27,64 @@ const EventList = () => {
   }, []);
 
   return (
-    <div className="p-10 bg-gradient-to-b from-amber-100 to-amber-300 min-h-screen flex justify-center items-center flex-col">
-      <div className="pb-10">
-        <h2 className="text-3xl text-center font-bold text-amber-900 mb-2">
+    <div className="min-h-screen bg-sand py-12 px-4 flex flex-col items-center">
+      <motion.div
+        className="max-w-6xl w-full"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, ease: "easeOut" }}
+      >
+        <h2 className="text-4xl font-extrabold text-center text-olive mb-10 tracking-tight">
           Upcoming Events
         </h2>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        {events.map((event) => (
-          <div
-            key={event.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
-          >
-            <img
-              src={`http://127.0.0.1:8000${event.img}`}
-              alt={event.type}
-              className="w-full h-48 object-cover"
-            />
-            <div className="p-5">
-              <h3 className="font-semibold text-amber-900 text-lg mb-2">
-                {event.type}
-              </h3>
-              <div className="flex justify-between items-center mb-2">
-                <p className="text-amber-700">
-                  Available: {event.bookings_available}
-                </p>
-                <p className="text-amber-600">Left: {event.bookings_left}</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          {events.map((event, idx) => (
+            <motion.div
+              key={event.id}
+              className="bg-beige rounded-3xl shadow-xl border-2 border-olive flex flex-col transition-transform hover:-translate-y-2 hover:shadow-2xl duration-300"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.07, duration: 0.5, ease: "easeOut" }}
+            >
+              <img
+                src={`http://127.0.0.1:8000${event.img}`}
+                alt={event.type}
+                className="w-full h-56 object-cover rounded-t-3xl"
+              />
+              <div className="p-6 flex-1 flex flex-col">
+                <h3 className="font-bold text-2xl text-black mb-2">
+                  {event.type}
+                </h3>
+                <div className="flex justify-between items-center mb-2">
+                  <p className="text-olive font-semibold">
+                    Available:{" "}
+                    <span className="text-black">
+                      {event.bookings_available}
+                    </span>
+                  </p>
+                  <p className="text-olive font-semibold">
+                    Left:{" "}
+                    <span className="text-black">{event.bookings_left}</span>
+                  </p>
+                </div>
+                <div className="flex justify-center mb-4">
+                  <img
+                    src={`http://127.0.0.1:8000${event.qr_code}`}
+                    alt={`QR Code for ${event.type}`}
+                    className="w-28 h-28 object-cover border-2 border-olive rounded-xl"
+                  />
+                </div>
+                <button
+                  onClick={() => handleEventClick(event.id)}
+                  className="mt-2 w-full bg-olive text-sand px-4 py-2 rounded-lg hover:bg-black hover:text-beige transition-colors flex items-center justify-center font-semibold"
+                >
+                  See More
+                </button>
               </div>
-              {/* Display the QR Code */}
-              <div className="flex justify-center mb-4">
-                <img
-                  src={`http://127.0.0.1:8000${event.qr_code}`}
-                  alt={`QR Code for ${event.type}`}
-                  className="w-32 h-32 object-cover"
-                />
-              </div>
-              <button
-                onClick={() => handleEventClick(event.id)}
-                className="mt-2 w-full bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 transition-colors flex items-center justify-center"
-              >
-                See More
-              </button>
-            </div>
-          </div>
-        ))}
-      </div>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 };

@@ -4,5 +4,5 @@
 
 html,
 body {
-  @apply bg-orange1;
+  @apply bg-sand text-black;
 }

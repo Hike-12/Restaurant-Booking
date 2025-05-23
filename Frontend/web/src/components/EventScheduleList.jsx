@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { Calendar, Clock, Users } from "lucide-react";
 import UserEvents from "./UserEvents";
+import { motion } from "framer-motion";
 
 // Helper function to get CSRF token
 const getCsrfToken = () => {
@@ -65,51 +66,56 @@ const EventScheduleList = () => {
 
   return (
     <>
-      <div className="p-10 bg-gradient-to-b from-amber-100 to-amber-300 min-h-screen flex flex-col items-center justify-center">
-        <div className="pb-10">
-          <h2 className="text-3xl text-center font-bold text-amber-900 mb-2">
+      <div className="p-10 min-h-screen flex flex-col items-center justify-center bg-sand">
+        <motion.div
+          className="max-w-6xl w-full"
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+        >
+          <h2 className="text-4xl text-center font-extrabold text-olive mb-10 tracking-tight">
             Event Schedule
           </h2>
           {registrationStatus && (
-            <p className="text-center text-amber-700 mt-2">
+            <p className="text-center text-olive mt-2">
               {registrationStatus}
             </p>
           )}
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
-          {schedules.map((schedule) => (
-            <div
-              key={schedule.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
-            >
-              <div className="p-4">
-                <h3 className="font-semibold text-amber-900 text-lg mb-2">
-                  {schedule.event}
-                </h3>
-                <div className="space-y-2 mb-4">
-                  <p className="text-amber-700 flex items-center">
-                    <Calendar className="mr-2 h-4 w-4" /> {schedule.date}
-                  </p>
-                  <p className="text-amber-700 flex items-center">
-                    <Clock className="mr-2 h-4 w-4" /> {schedule.time}
-                  </p>
-                  <p className="text-amber-700 flex items-center">
-                    <Users className="mr-2 h-4 w-4" /> Available:{" "}
-                    {schedule.bookings_available}, Left:{" "}
-                    {schedule.bookings_left}
-                  </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            {schedules.map((schedule, idx) => (
+              <motion.div
+                key={schedule.id}
+                className="bg-beige rounded-3xl shadow-xl border-2 border-olive flex flex-col transition-transform hover:-translate-y-2 hover:shadow-2xl duration-300"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: idx * 0.07, duration: 0.5, ease: "easeOut" }}
+              >
+                <div className="p-6 flex-1 flex flex-col">
+                  <h3 className="font-bold text-2xl text-black mb-2">{schedule.event}</h3>
+                  <div className="space-y-2 mb-4">
+                    <p className="text-olive flex items-center">
+                      <Calendar className="mr-2 h-4 w-4" /> {schedule.date}
+                    </p>
+                    <p className="text-olive flex items-center">
+                      <Clock className="mr-2 h-4 w-4" /> {schedule.time}
+                    </p>
+                    <p className="text-olive flex items-center">
+                      <Users className="mr-2 h-4 w-4" /> Available:{" "}
+                      <span className="text-black">{schedule.bookings_available}</span>, Left:{" "}
+                      <span className="text-black">{schedule.bookings_left}</span>
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => registerForEventSchedule(schedule.id)}
+                    className="w-full bg-olive text-sand px-4 py-2 rounded-lg hover:bg-black hover:text-beige transition-colors font-semibold"
+                  >
+                    Register
+                  </button>
                 </div>
-                <button
-                  onClick={() => registerForEventSchedule(schedule.id)}
-                  className="w-full bg-amber-600 text-white px-4 py-2 rounded-md hover:bg-amber-700 transition-colors"
-                >
-                  Register
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div>
       </div>
       <UserEvents />
     </>

@@ -35,9 +35,14 @@ const EventRegistration = ({ eventId }) => {
     };
 
     return (
-        <div>
-            <button onClick={registerForEvent}>Register for Event</button>
-            {status && <p>{status}</p>}
+        <div className="flex flex-col items-center">
+            <button
+                onClick={registerForEvent}
+                className="bg-olive text-sand px-6 py-2 rounded-lg font-semibold shadow hover:bg-black hover:text-beige transition-colors"
+            >
+                Register for Event
+            </button>
+            {status && <p className="mt-3 text-olive">{status}</p>}
         </div>
     );
 };
