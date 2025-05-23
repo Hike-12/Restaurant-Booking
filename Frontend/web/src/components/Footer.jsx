@@ -12,7 +12,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-start gap-8">
         <div className="mb-6 flex flex-col items-start">
           <img
-            src="src/assets/logo.jpg"
+            src="/logo.png"
             alt="The Coffee Cup Logo"
             className="w-20 h-20 rounded-full border-2 border-olive shadow"
           />

@@ -61,7 +61,7 @@ function Nav() {
         <div className="container mx-auto flex flex-wrap p-4 px-8 flex-col md:flex-row items-center bg-beige/80 shadow-lg rounded-b-2xl border-b-4 border-olive">
           <div className="flex flex-row items-center gap-3">
             <img
-              src="src/assets/logo.jpg"
+              src="/logo.png"
               alt="The Coffee Cup Logo"
               className="w-16 h-16 rounded-full border-2 border-olive shadow"
             />
