@@ -141,32 +141,32 @@ const TableBookingList = () => {
         transition={{ duration: 0.5, ease: "easeOut" }}
       >
         <div className="p-8">
-          <h2 className="text-3xl font-bold text-center mb-6 text-olive">
+          <h2 className="text-3xl font-bold text-center mb-6 text-darkBrown">
             Table Booking
           </h2>
           <div className="grid grid-cols-2 gap-4 mb-6">
             <div>
-              <label className="block text-base font-medium mb-1 text-black">
+              <label className="block text-base font-medium mb-1 text-darkBrown">
                 Date:
               </label>
               <div className="relative">
-                <Calendar className="absolute top-2.5 left-2 text-olive w-4 h-4" />
+                <Calendar className="absolute top-2.5 left-2 text-darkBrown w-4 h-4" />
                 <input
                   type="date"
                   value={bookingDate}
                   onChange={(e) => setBookingDate(e.target.value)}
-                  className="pl-8 p-2 text-sm border border-olive rounded w-full bg-sand text-black focus:outline-none focus:ring-2 focus:ring-olive"
+                  className="pl-8 p-2 text-sm border border-olive rounded w-full bg-sand text-darkBrown focus:outline-none focus:ring-2 focus:ring-olive"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-base font-medium mb-1 text-black">
+              <label className="block text-base font-medium mb-1 text-darkBrown">
                 Time:
               </label>
               <select
                 value={bookingTime}
                 onChange={(e) => setBookingTime(e.target.value)}
-                className="p-2 text-sm border border-olive rounded w-full bg-sand text-black focus:outline-none focus:ring-2 focus:ring-olive"
+                className="p-2 text-sm border border-olive rounded w-full bg-sand text-darkBrown focus:outline-none focus:ring-2 focus:ring-olive"
               >
                 <option value="">Select</option>
                 {timeOptions.map((time) => (

@@ -43,7 +43,7 @@ const ChefList = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <h2 className="text-4xl font-extrabold text-center text-olive mb-10 tracking-tight">
+        <h2 className="text-4xl font-extrabold text-center text-darkBrown mb-10 tracking-tight">
           Meet Our Chefs
         </h2>
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">

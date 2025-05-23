@@ -77,7 +77,7 @@ const EventScheduleList = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h2 className="text-4xl text-center font-extrabold text-olive mb-10 tracking-tight flex items-center justify-center">
+          <h2 className="text-4xl text-center font-extrabold text-darkBrown mb-10 tracking-tight flex items-center justify-center">
             <Calendar className="mr-3" size={32} />
             Event Schedule
           </h2>
@@ -89,8 +89,8 @@ const EventScheduleList = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
             >
-              <p className="text-center text-black flex items-center justify-center">
-                <AlertCircle className="mr-2 text-olive" size={18} />
+              <p className="text-center text-darkBrown flex items-center justify-center">
+                <AlertCircle className="mr-2 text-darkBrown" size={18} />
                 {registrationStatus}
               </p>
             </motion.div>
@@ -106,19 +106,19 @@ const EventScheduleList = () => {
                 transition={{ delay: idx * 0.07, duration: 0.5, ease: "easeOut" }}
               >
                 <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="font-bold text-2xl text-black mb-4">{schedule.event}</h3>
+                  <h3 className="font-bold text-2xl text-darkBrown mb-4">{schedule.event}</h3>
                   <div className="space-y-3 mb-6">
-                    <p className="text-olive flex items-center">
+                    <p className="text-darkBrown flex items-center">
                       <Calendar className="mr-2 h-5 w-5" /> 
-                      <span className="text-black">{schedule.date}</span>
+                      <span className="text-darkBrown">{schedule.date}</span>
                     </p>
-                    <p className="text-olive flex items-center">
+                    <p className="text-darkBrown flex items-center">
                       <Clock className="mr-2 h-5 w-5" /> 
-                      <span className="text-black">{schedule.time}</span>
+                      <span className="text-darkBrown">{schedule.time}</span>
                     </p>
-                    <p className="text-olive flex items-center">
+                    <p className="text-darkBrown flex items-center">
                       <Users className="mr-2 h-5 w-5" /> 
-                      <span className="text-black">
+                      <span className="text-darkBrown">
                         {schedule.bookings_available} spots available, {schedule.bookings_left} left
                       </span>
                     </p>

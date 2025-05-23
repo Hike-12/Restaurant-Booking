@@ -20,6 +20,7 @@ export default {
         beige: "#EAE4D5",
         olive: "#B6B09F",
         black: "#000000",
+        darkBrown: "#4B352A",
       },
     },
   },

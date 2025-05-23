@@ -80,7 +80,7 @@ const Chatbot = () => {
       transition={{ duration: 0.7, ease: "easeOut" }}
     >
       <div className="w-full max-w-xl mx-auto p-6 bg-beige rounded-2xl shadow-2xl border-2 border-olive">
-        <h2 className="text-2xl text-center font-bold mb-4 text-olive">
+        <h2 className="text-2xl text-center font-bold mb-4 text-darkBrown">
           Chatbot
         </h2>
         <div className="h-80 overflow-y-auto border border-olive rounded-lg p-4 mb-4 bg-sand">
@@ -95,10 +95,10 @@ const Chatbot = () => {
                 className={`inline-block max-w-[70%] p-2 rounded-lg ${
                   chat.sender === "user"
                     ? "bg-olive text-sand"
-                    : "bg-beige text-black"
+                    : "bg-beige text-darkBrown"
                 }`}
               >
-                <strong className="text-xs text-olive">
+                <strong className="text-xs text-darkBrown">
                   {chat.sender === "user" ? "You" : "Bot"}:
                 </strong>
                 <div

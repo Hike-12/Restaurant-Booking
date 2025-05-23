@@ -28,7 +28,7 @@ const Reviews = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <h2 className="text-4xl font-extrabold mt-2 text-center text-olive mb-10 tracking-tight">
+        <h2 className="text-4xl font-extrabold mt-2 text-center text-darkBrown mb-10 tracking-tight">
           Customer Reviews
         </h2>
         <div className="my-8">
@@ -37,7 +37,7 @@ const Reviews = () => {
         <div className="my-10">
           <hr className="border-olive" />
           <br />
-          <h2 className="text-center font-bold text-3xl text-olive">
+          <h2 className="text-center font-bold text-3xl text-darkBrown">
             Reviews from our customers
           </h2>
         </div>
@@ -55,13 +55,13 @@ const Reviews = () => {
                   <strong className="text-lg text-black">{review.user}</strong>
                   <div className="flex items-center">
                     <Star className="w-5 h-5 text-yellow-500 mr-1" />
-                    <span className="text-olive font-semibold">
+                    <span className="text-darkBrown font-semibold">
                       {review.rating}/5
                     </span>
                   </div>
                 </div>
                 <p className="text-black mb-4 flex-1">{review.comment}</p>
-                <div className="flex items-center text-sm text-olive">
+                <div className="flex items-center text-sm text-darkBrown">
                   <Calendar className="w-4 h-4 mr-2" />
                   <small>{new Date(review.created_at).toLocaleString()}</small>
                 </div>
@@ -69,7 +69,7 @@ const Reviews = () => {
             ))}
           </ul>
         ) : (
-          <p className="text-center text-olive">No reviews yet.</p>
+          <p className="text-center text-darkBrown">No reviews yet.</p>
         )}
       </motion.div>
     </div>

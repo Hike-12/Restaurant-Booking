@@ -60,7 +60,7 @@ const AddReview = () => {
         </motion.div>
       )}
 
-      <h3 className="text-2xl font-bold mb-6 text-olive flex items-center">
+      <h3 className="text-2xl font-bold mb-6 text-darkBrown flex items-center">
         <Star className="mr-2 text-yellow-500" size={24} />
         Submit Your Review
       </h3>
@@ -96,7 +96,7 @@ const AddReview = () => {
               />
             ))}
           </div>
-          <span className="text-olive ml-2 font-semibold">{rating}/5</span>
+          <span className="text-darkBrown ml-2 font-semibold">{rating}/5</span>
         </div>
       </div>
 

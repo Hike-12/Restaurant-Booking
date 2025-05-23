@@ -69,7 +69,7 @@ const EventList = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <h2 className="text-4xl font-extrabold text-center text-olive mb-10 tracking-tight">
+        <h2 className="text-4xl font-extrabold text-center text-darkBrown mb-10 tracking-tight">
           Upcoming Events
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -90,26 +90,26 @@ const EventList = () => {
                 />
               </div>
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="font-bold text-2xl text-black mb-2">
+                <h3 className="font-bold text-2xl text-darkBrown mb-2">
                   {event.type}
                 </h3>
                 <div className="flex justify-between items-center mb-4">
-                  <p className="text-olive font-semibold flex items-center">
+                  <p className="text-darkBrown font-semibold flex items-center">
                     <Calendar size={16} className="mr-1" />
                     Available:{" "}
-                    <span className="text-black ml-1">
+                    <span className="text-darkBrown ml-1">
                       {event.bookings_available}
                     </span>
                   </p>
-                  <p className="text-olive font-semibold flex items-center">
+                  <p className="text-darkBrown font-semibold flex items-center">
                     <Users size={16} className="mr-1" />
                     Left:{" "}
-                    <span className="text-black ml-1">{event.bookings_left}</span>
+                    <span className="text-darkBrown ml-1">{event.bookings_left}</span>
                   </p>
                 </div>
                 <div className="flex justify-center mb-4">
                   <div className="relative">
-                    <QrCode size={18} className="absolute top-0 left-0 text-olive m-2" />
+                    <QrCode size={18} className="absolute top-0 left-0 text-darkBrown m-2" />
                     <OptimizedImage
                       src={event.qr_code}
                       alt={`QR Code for ${event.type}`}

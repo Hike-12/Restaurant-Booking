@@ -67,7 +67,7 @@ function Nav() {
               alt="The Coffee Cup Logo"
               className="w-12 h-12 sm:w-14 sm:h-14 rounded-full border-2 border-olive shadow-md"
             />
-            <span className="text-xl sm:text-3xl font-bold text-olive tracking-wide">
+            <span className="text-xl sm:text-3xl font-bold text-darkBrown tracking-wide">
               The Coffee Cup
             </span>
           </Link>
@@ -80,7 +80,7 @@ function Nav() {
                 to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
                 className={`px-3 py-2 rounded-lg text-black hover:bg-olive/10 transition-colors ${
                   location.pathname === (item === "Home" ? "/" : `/${item.toLowerCase()}`)
-                    ? "font-semibold text-olive bg-olive/10"
+                    ? "font-semibold text-darkBrown bg-olive/10"
                     : ""
                 }`}
               >
@@ -90,7 +90,7 @@ function Nav() {
             <Link
               to="/chatbot"
               className={`px-3 py-2 rounded-lg text-black hover:bg-olive/10 transition-colors ${
-                location.pathname === "/chatbot" ? "font-semibold text-olive bg-olive/10" : ""
+                location.pathname === "/chatbot" ? "font-semibold text-darkBrown bg-olive/10" : ""
               }`}
             >
               AI Assistance
@@ -178,7 +178,7 @@ function Nav() {
               {isAuthenticated ? (
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left py-3 px-4 text-olive hover:bg-olive/10 transition-colors flex items-center gap-2"
+                  className="w-full text-left py-3 px-4 text-darkBrown hover:bg-olive/10 transition-colors flex items-center gap-2"
                 >
                   <LogOut size={18} />
                   <span>Logout</span>

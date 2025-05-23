@@ -31,7 +31,7 @@ const Events = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <h2 className="text-4xl font-extrabold text-center text-olive mb-10 tracking-tight">
+        <h2 className="text-4xl font-extrabold text-center text-darkBrown mb-10 tracking-tight">
           Upcoming Events
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -49,11 +49,11 @@ const Events = () => {
                 className="w-full h-56 object-cover rounded-t-3xl"
               />
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="font-bold text-2xl text-black mb-2">{event.title}</h3>
-                <p className="text-olive font-semibold mb-2">
+                <h3 className="font-bold text-2xl text-darkBrown mb-2">{event.title}</h3>
+                <p className="text-darkBrown font-semibold mb-2">
                   {new Date(event.date).toLocaleDateString()}
                 </p>
-                <p className="text-black text-base mb-4 flex-1">{event.description}</p>
+                <p className="text-darkBrown text-base mb-4 flex-1">{event.description}</p>
               </div>
             </motion.div>
           ))}

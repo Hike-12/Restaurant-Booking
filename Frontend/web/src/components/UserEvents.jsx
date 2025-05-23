@@ -84,7 +84,7 @@ const UserEvents = () => {
       transition={{ duration: 0.7, ease: "easeOut" }}
     >
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-3xl text-center font-bold mb-8 text-olive">
+        <h2 className="text-3xl text-center font-bold mb-8 text-darkBrown">
           Your Registered Events
         </h2>
         <ul className="grid pt-4 px-0 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -101,18 +101,18 @@ const UserEvents = () => {
                   ease: "easeOut",
                 }}
               >
-                <h3 className="text-2xl font-bold mb-3 text-black">
+                <h3 className="text-2xl font-bold mb-3 text-darkBrown">
                   {event.event_type}
                 </h3>
                 <div className="space-y-2 text-base mb-4">
-                  <p className="flex items-center text-olive">
+                  <p className="flex items-center text-darkBrown">
                     <Calendar size={18} className="mr-2" />
                     {new Date(event.event_date).toLocaleString()}
                   </p>
-                  <p className="flex items-center text-olive">
+                  <p className="flex items-center text-darkBrown">
                     <Users size={18} className="mr-2" />
-                    <span className="text-black">{event.bookings_left}</span> /{" "}
-                    <span className="text-black">{event.bookings_available}</span>{" "}
+                    <span className="text-darkBrown">{event.bookings_left}</span> /{" "}
+                    <span className="text-darkBrown">{event.bookings_available}</span>{" "}
                     spots left
                   </p>
                   {event.is_in_queue ? (
@@ -148,7 +148,7 @@ const UserEvents = () => {
               </motion.li>
             ))
           ) : (
-            <p className="text-olive col-span-full">
+            <p className="text-darkBrown col-span-full">
               You haven't registered for any events yet.
             </p>
           )}

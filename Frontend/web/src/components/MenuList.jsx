@@ -60,7 +60,7 @@ const MenuList = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: "easeOut" }}
       >
-        <h2 className="text-4xl font-extrabold text-center text-olive mb-10 tracking-tight flex items-center justify-center">
+        <h2 className="text-4xl font-extrabold text-center text-darkBrown mb-10 tracking-tight flex items-center justify-center">
           <Coffee size={32} className="mr-3" />
           Our Menu
         </h2>
@@ -87,15 +87,15 @@ const MenuList = () => {
                 </div>
               </div>
               <div className="p-6 flex-1 flex flex-col">
-                <h3 className="font-bold text-2xl text-black mb-3 group-hover:text-olive transition-colors">
+                <h3 className="font-bold text-2xl text-darkBrown mb-3 group-hover:text-darkBrown transition-colors">
                   {menu.item}
                 </h3>
-                <p className="text-olive font-semibold mb-2 flex items-center">
+                <p className="text-darkBrown font-semibold mb-2 flex items-center">
                   <Flame size={16} className="mr-2" />
                   Calories:{" "}
-                  <span className="text-black ml-1">{menu.calories} kcal</span>
+                  <span className="text-darkBrown ml-1">{menu.calories} kcal</span>
                 </p>
-                <p className="text-black text-base mb-4 flex-1">
+                <p className="text-darkBrown text-base mb-4 flex-1">
                   {menu.description}
                 </p>
                 <div className="flex justify-end">

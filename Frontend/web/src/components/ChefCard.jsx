@@ -23,14 +23,14 @@ const ChefCard = ({ chef }) => {
         </div>
       </div>
       <div className="p-6 flex-1 flex flex-col">
-        <h5 className="mb-2 text-2xl font-bold tracking-tight text-black group-hover:text-olive transition-colors">
+        <h5 className="mb-2 text-2xl font-bold tracking-tight text-darkBrown group-hover:text-olive transition-colors">
           {chef.name}
         </h5>
-        <p className="mb-3 font-medium text-olive">
-          <span className="font-semibold text-black">Specialty:</span> {chef.cuisine}
+        <p className="mb-3 font-medium text-darkBrown">
+          <span className="font-semibold text-darkBrown">Specialty:</span> {chef.cuisine}
         </p>
-        <p className="mb-3 font-medium text-olive">
-          <span className="font-semibold text-black">Availability:</span> {chef.availability}
+        <p className="mb-3 font-medium text-darkBrown">
+          <span className="font-semibold text-darkBrown">Availability:</span> {chef.availability}
         </p>
         <div className="flex-1"></div>
         <div className="flex justify-end">

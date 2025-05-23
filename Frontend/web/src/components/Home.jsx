@@ -19,16 +19,16 @@ const Home = () => {
           }}
         >
           <motion.h1
-            className="mb-6 text-5xl font-extrabold leading-tight text-black tracking-tight"
+            className="mb-6 text-5xl font-extrabold leading-tight text-darkBrown tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
           >
             Experience the Art of{" "}
-            <span className="text-olive">Exclusive Dining</span>
+            <span className="text-darkBrown">Exclusive Dining</span>
           </motion.h1>
           <motion.p
-            className="mb-8 text-xl font-normal text-olive"
+            className="mb-8 text-xl font-normal text-darkBrown"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.5 }}
@@ -53,7 +53,7 @@ const Home = () => {
             </Link>
             <Link
               to="/tour"
-              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-olive bg-sand border-2 border-olive rounded-xl shadow hover:bg-beige hover:text-black transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-darkBrown bg-sand border-2 border-olive rounded-xl shadow hover:bg-beige hover:text-black transition-colors"
             >
               <Video size={20} className="mr-2" />
               Virtual Tour

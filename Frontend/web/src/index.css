@@ -4,5 +4,5 @@
 
 html,
 body {
-  @apply bg-sand text-black;
+  @apply bg-sand text-darkBrown;
 }

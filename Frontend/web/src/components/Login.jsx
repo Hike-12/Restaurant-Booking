@@ -57,7 +57,7 @@ const Login = () => {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
         >
-          <h2 className="text-3xl font-bold mb-6 text-center text-olive">
+          <h2 className="text-3xl font-bold mb-6 text-center text-darkBrown">
             Login
           </h2>
           <form onSubmit={handleSubmit} className="space-y-6">
@@ -68,7 +68,7 @@ const Login = () => {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
-                className="shadow appearance-none border border-olive rounded-lg w-full py-3 px-4 text-black leading-tight focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand"
+                className="shadow appearance-none border border-olive rounded-lg w-full py-3 px-4 text-darkBrown leading-tight focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand"
               />
             </div>
             <div>
@@ -78,7 +78,7 @@ const Login = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="shadow appearance-none border border-olive rounded-lg w-full py-3 px-4 text-black mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand"
+                className="shadow appearance-none border border-olive rounded-lg w-full py-3 px-4 text-darkBrown mb-3 leading-tight focus:outline-none focus:ring-2 focus:ring-olive focus:border-olive bg-sand"
               />
             </div>
             <div>

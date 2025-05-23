@@ -16,17 +16,17 @@ const Footer = () => {
             alt="The Coffee Cup Logo"
             className="w-20 h-20 rounded-full border-2 border-olive shadow"
           />
-          <h2 className="text-2xl font-bold mt-3 text-olive">
+          <h2 className="text-2xl font-bold mt-3 text-darkBrown">
             The Coffee Cup
           </h2>
         </div>
         <div className="mb-6">
-          <h3 className="font-bold mb-4 text-olive">Quick Links</h3>
+          <h3 className="font-bold mb-4 text-darkBrown">Quick Links</h3>
           <ul className="space-y-2">
             <li>
               <a
                 href="#"
-                className="hover:text-olive transition-colors text-black"
+                className="hover:text-olive transition-colors text-darkBrown"
               >
                 Home
               </a>
@@ -34,7 +34,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-olive transition-colors text-black"
+                className="hover:text-olive transition-colors text-darkBrown"
               >
                 About Us
               </a>
@@ -42,7 +42,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-olive transition-colors text-black"
+                className="hover:text-olive transition-colors text-darkBrown"
               >
                 The Coffee Cup Insists
               </a>
@@ -50,7 +50,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-olive transition-colors text-black"
+                className="hover:text-olive transition-colors text-darkBrown"
               >
                 Brew Stories
               </a>
@@ -58,7 +58,7 @@ const Footer = () => {
             <li>
               <a
                 href="#"
-                className="hover:text-olive transition-colors text-black"
+                className="hover:text-olive transition-colors text-darkBrown"
               >
                 Contact Us
               </a>
@@ -66,16 +66,16 @@ const Footer = () => {
           </ul>
         </div>
         <div className="mb-6">
-          <h3 className="font-bold mb-4 text-olive">Address</h3>
+          <h3 className="font-bold mb-4 text-darkBrown">Address</h3>
           <a
             href="https://www.google.com/maps/place/Juhu+Residency+Boutique+Hotel,+Mumbai,+Maharashtra+400049"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-olive transition-colors text-black"
+            className="hover:text-olive transition-colors text-darkBrown"
           >
             Juhu Residency Boutique Hotel, Mumbai,<br /> Maharashtra 400049
           </a>
-          <p className="flex items-center mt-2 text-olive">
+          <p className="flex items-center mt-2 text-darkBrown">
             <span role="img" aria-label="Location pin" className="mr-2">
               📍
             </span>
@@ -83,14 +83,14 @@ const Footer = () => {
           </p>
         </div>
         <div className="mb-6">
-          <h3 className="font-bold mb-4 text-olive">Contact</h3>
-          <p className="flex items-center text-black">
+          <h3 className="font-bold mb-4 text-darkBrown">Contact</h3>
+          <p className="flex items-center text-darkBrown">
             <span role="img" aria-label="Phone" className="mr-2">
               📞
             </span>
             +91 98256 03145
           </p>
-          <p className="flex items-center mt-2 text-black">
+          <p className="flex items-center mt-2 text-darkBrown">
             <span role="img" aria-label="Email" className="mr-2">
               ✉️
             </span>
@@ -111,7 +111,7 @@ const Footer = () => {
             Order On Swiggy
           </a>
           <div className="mt-4 text-center">
-            <p className="text-olive">Open For Dine-In</p>
+            <p className="text-darkBrown">Open For Dine-In</p>
             <p className="text-2xl font-bold text-black">24/7</p>
           </div>
         </div>
@@ -137,10 +137,10 @@ const Footer = () => {
             <i className="fab fa-spotify text-xl"></i>
           </a>
         </div>
-        <p className="mt-2 text-black">
+        <p className="mt-2 text-darkBrown">
           © The Coffee Cup 2024. Webworks by Infobahn
         </p>
-        <p className="text-sm text-olive">
+        <p className="text-sm text-darkBrown">
           Registered name: Bunts Hotels Private Limited
         </p>
       </div>
