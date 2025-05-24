@@ -9,14 +9,13 @@ The Coffee Cup Restaurant Booking System is a comprehensive web application that
 - **Domain:** Full-Stack Web Application Development for Restaurant Management & Booking
 - **Languages and Frameworks:**
   - **Frontend:** React.js, Vite, TailwindCSS, Framer Motion
-  - **Backend:** Django, Django REST Framework
-  - **Database:** SQLite (Development), PostgreSQL (Production)
+  - **Backend:** Django
+  - **Database:** SQLite (Development)
   - **AI Integration:** Google Generative AI (Gemini)
 - **Tools & Technologies:**
   - **Version Control:** GitHub
   - **Development Environment:** VS Code
   - **Deployment:** Render (Backend), Vercel (Frontend)
-  - **State Management:** React Query (TanStack Query)
   - **Styling:** TailwindCSS with custom color palette
   - **Animations:** Framer Motion
   - **Image Optimization:** Custom service worker with caching
