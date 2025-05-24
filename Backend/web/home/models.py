@@ -30,44 +30,6 @@ class Event(models.Model):
     def __str__(self):
         return self.type
 
-    def generate_qr_code(self):
-        qr = qrcode.QRCode(
-            version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
-            box_size=10,
-            border=4,
-        )
-        # Use the production URL for QR codes
-        qr_url = f'https://coffee-cup-gamma.vercel.app/events/{self.id}/register'
-        qr.add_data(qr_url)
-        qr.make(fit=True)
-
-        img = qr.make_image(fill='black', back_color='white')
-        
-        # Save the QR code to a BytesIO object
-        img_bytes = io.BytesIO()
-        img.save(img_bytes, format='PNG')
-        img_file = ContentFile(img_bytes.getvalue(), f'qr_code_{self.id}.png')
-        
-        # Save the QR code image to the model
-        self.qr_code.save(f'qr_code_{self.id}.png', img_file, save=False)
-
-    def save(self, *args, **kwargs):
-        # Only generate QR code on creation
-        if not self.pk:  # If this is a new instance
-            super().save(*args, **kwargs)  # Save first to get ID
-            self.generate_qr_code()
-            super().save(*args, **kwargs)  # Save again with QR code
-        else:
-            super().save(*args, **kwargs)
-
-# Use signals to generate QR code after saving
-@receiver(post_save, sender=Event)
-def create_qr_code(sender, instance, created, **kwargs):
-    if created:
-        instance.generate_qr_code()
-        instance.save()
-
 class EventSchedule(models.Model):
     event = models.ForeignKey(Event, on_delete=models.CASCADE)
     timing = models.DateTimeField(null=True, blank=True)

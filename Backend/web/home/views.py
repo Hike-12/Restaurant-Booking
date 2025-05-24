@@ -53,51 +53,61 @@ def chatbot(request):
     
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
+
+# Add this helper function
+def get_image_url(image_field):
+    """
+    Helper function to get the correct URL for an image field.
+    Handles both external URLs and Django media files.
+    """
+    if not image_field:
+        return ""
+    
+    # Convert to string first to handle both file paths and URLs
+    img_str = str(image_field)
+    
+    # If it's already a full URL, return as-is
+    if img_str.startswith('http://') or img_str.startswith('https://'):
+        return img_str
+    
+    # If it's a local file path, try to get the URL
+    try:
+        return image_field.url if hasattr(image_field, 'url') else ""
+    except:
+        return ""
+    
+    
 def menu_list(request):
     menus = Menu.objects.all()
     data = []
     for menu in menus:
-        # Handle external URLs properly
-        img_url = menu.img.name if menu.img else ""
-        if img_url.startswith('http://') or img_url.startswith('https://'):
-            # It's an external URL, use it directly
-            img_display = img_url
-        else:
-            # It's a relative path, use Django's .url
-            img_display = menu.img.url if menu.img else ""
-            
         data.append({
             'item': menu.item,
             'cost': float(menu.cost),
-            'img': img_display,
+            'img': get_image_url(menu.img),
             'description': menu.description, 
             'calories': menu.calories,
         })
     return JsonResponse(data, safe=False)
 
+    
+    
 def event_list(request):
     events = Event.objects.all()
     data = []
     for event in events:
         # Handle external URLs for event images
-        img_url = event.img.name if event.img else ""
-        if img_url.startswith('http://') or img_url.startswith('https://'):
-            img_display = img_url
-        else:
-            img_display = event.img.url if event.img else ""
-            
-        # Handle QR code URLs
-        qr_url = event.qr_code.name if event.qr_code else ""
-        if qr_url.startswith('http://') or qr_url.startswith('https://'):
-            qr_display = qr_url
-        else:
-            qr_display = event.qr_code.url if event.qr_code else None
-            
+        img_display = get_image_url(event.img)
+        
+        # Generate QR code URL dynamically using online service
+        event_url = f"https://coffee-cup-gamma.vercel.app/events/{event.id}/register"
+        qr_code_url = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={quote(event_url)}"
+        
         data.append({
             'id': event.id,
             'type': event.type,
             'img': img_display,
-            'qr_code': qr_display,
+            'qr_code': qr_code_url,  # Dynamic QR code
             'bookings_available': event.bookings_available,
             'bookings_left': event.bookings_left,
         })
@@ -124,18 +134,11 @@ def chef_list(request):
     chefs = Chef.objects.all()
     data = []
     for chef in chefs:
-        # Handle external URLs for chef images
-        img_url = chef.img.name if chef.img else ""
-        if img_url.startswith('http://') or img_url.startswith('https://'):
-            img_display = img_url
-        else:
-            img_display = chef.img.url if chef.img else ""
-            
         data.append({
             'name': chef.name,
             'availability': chef.availability,
             'cuisine': chef.cuisine,
-            'img': img_display
+            'img': get_image_url(chef.img)
         })
     return JsonResponse(data, safe=False)
 
