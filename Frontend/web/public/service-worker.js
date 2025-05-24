@@ -41,7 +41,7 @@ self.addEventListener('activate', (event) => {
 
 // Special handling for API image requests
 const isImageAPIRequest = (url) => {
-  return url.includes('http://127.0.0.1:8000') && 
+  return url.includes('restraunt-booking.onrender.com') && 
     (url.includes('.jpg') || url.includes('.jpeg') || 
      url.includes('.png') || url.includes('.gif') || 
      url.includes('.webp') || url.includes('/media/'));

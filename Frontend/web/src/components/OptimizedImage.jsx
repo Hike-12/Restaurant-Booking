@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { useImageCache } from '../hooks/useImageCache';
+import { VITE_API_BASE_URL } from '../config/api';
 
 /**
  * Optimized image component with loading state
