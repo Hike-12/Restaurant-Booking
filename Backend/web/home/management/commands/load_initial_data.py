@@ -126,7 +126,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Veggie Wrap",
                 cost=675.00,
-                img="https://unsplash.com/photos/green-vegetable-on-white-ceramic-plate--g7wQeusJsg?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=500&h=400&fit=crop&auto=format",
                 description="Whole wheat wrap with mixed veggies.",
                 calories=400
             )
@@ -134,7 +134,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Pasta Alfredo",
                 cost=975.00,
-                img="https://unsplash.com/photos/potato-fries-on-white-ceramic-plate-flFd8L7_B3g?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=500&h=400&fit=crop&auto=format",
                 description="Creamy Alfredo sauce over fettuccine",
                 calories=900
             )
@@ -219,7 +219,7 @@ class Command(BaseCommand):
                 name="Massimo Bottura",
                 availability="10 am to 6 pm",
                 cuisine="Italian",
-                img="https://unsplash.com/photos/a-man-cooking-on-a-stove-in-a-kitchen-Cjb5C2DKXUs?w=500&h=500&fit=crop&auto=format"
+                img="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&h=500&fit=crop&auto=format"
             )
             
             Chef.objects.create(
@@ -233,14 +233,14 @@ class Command(BaseCommand):
                 name="Alain Ducasse",
                 availability="8 am to 4 pm",
                 cuisine="French",
-                img="https://unsplash.com/photos/man-holding-fish-dish-on-plate-e5Q5vWO55uU?w=500&h=500&fit=crop&auto=format"
+                img="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=500&h=500&fit=crop&auto=format"
             )
             
             Chef.objects.create(
                 name="Hélène Darroze",
                 availability="12 pm to 8 pm",
                 cuisine="French",
-                img="https://unsplash.com/photos/a-woman-cooking-food-in-a-large-pot-uD4MZxSjS64?w=500&h=500&fit=crop&auto=format"
+                img="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500&h=500&fit=crop&auto=format"
             )
             
             Chef.objects.create(
