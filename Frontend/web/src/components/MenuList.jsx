@@ -23,7 +23,9 @@ const MenuList = () => {
         setMenus(data);
 
         // Preload all menu images
-        const imageUrls = data.map((menu) => `${VITE_API_BASE_URL.replace('/api', '')}${menu.img}`);
+       const imageUrls = data
+  .map((menu) => menu.img)
+  .filter(img => img && (img.startsWith('http://') || img.startsWith('https://')));
         preloadImages(imageUrls);
       } catch (err) {
         setError(err.message);

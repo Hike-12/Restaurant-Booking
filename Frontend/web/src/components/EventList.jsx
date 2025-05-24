@@ -25,10 +25,9 @@ const EventList = () => {
         setEvents(data);
 
         // Preload all event images to speed up rendering
-        const imageUrls = data.flatMap((event) => [
-          `${VITE_API_BASE_URL.replace('/api', '')}${event.img}`,
-          `${VITE_API_BASE_URL.replace('/api', '')}${event.qr_code}`,
-        ]);
+        const imageUrls = data
+  .map((menu) => menu.img)
+  .filter(img => img && (img.startsWith('http://') || img.startsWith('https://')));
         preloadImages(imageUrls);
       } catch (err) {
         setError(err.message);

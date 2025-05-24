@@ -40,12 +40,67 @@ self.addEventListener('activate', (event) => {
 });
 
 // Special handling for API image requests
+// Update the isImageAPIRequest function:
+
 const isImageAPIRequest = (url) => {
-  return url.includes('restraunt-booking.onrender.com') && 
-    (url.includes('.jpg') || url.includes('.jpeg') || 
-     url.includes('.png') || url.includes('.gif') || 
-     url.includes('.webp') || url.includes('/media/'));
+  return (
+    // Backend API images
+    (url.includes('restraunt-booking.onrender.com') && 
+     (url.includes('.jpg') || url.includes('.jpeg') || 
+      url.includes('.png') || url.includes('.gif') || 
+      url.includes('.webp') || url.includes('/media/'))) ||
+    // External images (Unsplash, etc.)
+    (url.includes('images.unsplash.com') || 
+     url.includes('via.placeholder.com'))
+  );
 };
+
+// Update the fetch event listener:
+self.addEventListener('fetch', (event) => {
+  // Skip caching for malformed URLs
+  try {
+    new URL(event.request.url);
+  } catch (e) {
+    console.error('Invalid URL:', event.request.url);
+    return;
+  }
+
+  // Special handling for image requests
+  if (isImageAPIRequest(event.request.url)) {
+    event.respondWith(
+      caches.open(IMAGE_CACHE_NAME).then((cache) => {
+        return cache.match(event.request).then((cachedResponse) => {
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+          
+          return fetch(event.request)
+            .then((networkResponse) => {
+              if (networkResponse.ok) {
+                cache.put(event.request, networkResponse.clone());
+              }
+              return networkResponse;
+            })
+            .catch((error) => {
+              console.error('Fetch failed:', error);
+              // Return a placeholder response for failed images
+              return new Response('', { 
+                status: 404, 
+                statusText: 'Image not found' 
+              });
+            });
+        });
+      })
+    );
+  } else {
+    // Standard cache-first strategy for other requests
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        return cachedResponse || fetch(event.request);
+      })
+    );
+  }
+});
 
 // Fetch event - serve from cache or network
 self.addEventListener('fetch', (event) => {
