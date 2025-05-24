@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Calendar, Users, CheckCircle, AlertCircle, X, Clock } from "lucide-react";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 const UserEvents = () => {
   const [events, setEvents] = useState([]);
@@ -40,13 +41,13 @@ const UserEvents = () => {
       );
 
       if (response.ok) {
-        alert("Event canceled successfully");
+        toast.success("Event canceled successfully!");
         setEvents(events.filter((event) => event.id !== eventId));
       } else {
-        alert("Error canceling event");
+        toast.error("Error canceling event");
       }
     } catch (err) {
-      alert("An error occurred while canceling");
+      toast.error("An error occurred while canceling");
     }
   };
 
@@ -66,9 +67,10 @@ const UserEvents = () => {
 
       const data = await response.json();
       const pos = data.position_in_queue + 1; // Adjusting queue position for display
-      alert(`Queue position: ${pos}`);
+      toast.info(`Queue position: ${pos}`);
     } catch (err) {
       console.error(err.message);
+      toast.error("Error fetching queue position");
     }
   };
 

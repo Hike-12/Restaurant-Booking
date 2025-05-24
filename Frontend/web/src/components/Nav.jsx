@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, User, LogOut } from "lucide-react";
+import { toast } from 'react-toastify';
 
 function Nav() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -42,11 +43,14 @@ function Nav() {
         // Clear the authentication status from localStorage
         localStorage.removeItem("isAuthenticated");
         setIsAuthenticated(false); // Update state to reflect logout
+        toast.success("Logged out successfully!");
         console.log("Logged out successfully");
       } else {
+        toast.error("Logout failed: " + data.message);
         console.error("Logout failed:", data.message);
       }
     } catch (error) {
+      toast.error("Error during logout");
       console.error("Error during logout:", error);
     }
   };

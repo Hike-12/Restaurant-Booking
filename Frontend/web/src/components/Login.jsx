@@ -1,24 +1,23 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     setIsLoading(true);
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/login/", {
         method: "POST",
         headers: {
-          "Content-Type": "application/json", // Corrected Content-Type
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ username, password }),
         credentials: "include",
@@ -26,19 +25,19 @@ const Login = () => {
 
       const data = await response.json();
       if (response.ok && data.success) {
-        // Store the session ID or token in localStorage
-        localStorage.setItem("authToken", data.token); // Use 'authToken' or similar
+        localStorage.setItem("authToken", data.token);
         localStorage.setItem("username", data.username);
         localStorage.setItem("isAuthenticated", "true");
-        navigate("/"); // Redirect to home page or desired route
+        toast.success("Login successful! Welcome back!");
+        navigate("/");
       } else {
-        setError(
+        toast.error(
           data.message || "Login failed. Please check your credentials."
         );
       }
     } catch (error) {
       console.error("Login error:", error);
-      setError("Network error. Please try again later.");
+      toast.error("Network error. Please try again later.");
     } finally {
       setIsLoading(false);
     }
@@ -93,7 +92,6 @@ const Login = () => {
               </button>
             </div>
           </form>
-          {error && <p className="text-red-500 text-xs italic mt-4">{error}</p>}
         </motion.div>
       </div>
     </>

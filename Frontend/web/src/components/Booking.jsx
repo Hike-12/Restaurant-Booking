@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CalendarCheck, Loader2 } from 'lucide-react';
+import { toast } from 'react-toastify';
 
 const BookingForm = () => {
     const { scheduleId } = useParams();
@@ -22,14 +23,17 @@ const BookingForm = () => {
             });
 
             const data = await response.json();
+            console.log('Booking response:', data);
             if (response.ok) {
-                alert('Booking successful!');
+                toast.success('Booking successful!');
                 navigate('/events');
             } else {
+                toast.error(data.message || 'Booking failed.');
                 setError(data.message || 'Booking failed.');
             }
         } catch (error) {
             console.error('Error during booking:', error);
+            toast.error('Network error. Please try again later.');
             setError('Network error. Please try again later.');
         } finally {
             setIsLoading(false);

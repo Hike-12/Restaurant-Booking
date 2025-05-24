@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { Star, Send } from "lucide-react";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 const AddReview = () => {
   const [rating, setRating] = useState(5);
   const [comment, setComment] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,13 +29,11 @@ const AddReview = () => {
 
       const result = await response.json();
       console.log("Review added:", result);
-      setSuccess(true);
+      toast.success("Review submitted successfully!");
       setComment("");
-
-      // Reset success message after 3 seconds
-      setTimeout(() => setSuccess(false), 3000);
     } catch (error) {
       console.error("Error adding review:", error);
+      toast.error("Error submitting review. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
@@ -49,17 +47,6 @@ const AddReview = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      {success && (
-        <motion.div
-          className="absolute inset-0 bg-olive flex items-center justify-center text-sand text-lg font-semibold"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          Review submitted successfully!
-        </motion.div>
-      )}
-
       <h3 className="text-2xl font-bold mb-6 text-darkBrown flex items-center">
         <Star className="mr-2 text-yellow-500" size={24} />
         Submit Your Review
@@ -96,7 +83,9 @@ const AddReview = () => {
               />
             ))}
           </div>
-          <span className="text-darkBrown ml-2 font-semibold">{rating}/5</span>
+          <span className="text-darkBrown ml-2 font-semibold">
+            {rating}/5
+          </span>
         </div>
       </div>
 

@@ -16,14 +16,16 @@ import os
 from django.utils import timezone
 from datetime import datetime
 from django.utils import timezone
+from dotenv import load_dotenv
 
+load_dotenv()
 
 def get_bot_response(user_message):
     try:
         api_key = os.getenv("GOOGLE_API_KEY")  
         genai.configure(api_key=api_key)
         print(api_key)
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        model = genai.GenerativeModel("gemini-2.0-flash")
         response = model.generate_content(user_message)
         if hasattr(response, 'text'):
             return response.text.strip()
@@ -375,7 +377,8 @@ def custom_login(request):
             print(f"Session key after login: {request.session.session_key}")
             print(f"Session data: {request.session.items()}")  # Log session data
             return JsonResponse({
-                "success": True, 
+                "success": True,
+                "token": request.session.session_key,
                 "message": "Logged in successfully",
                 "sessionid": request.session.session_key,
                 "username": user.username

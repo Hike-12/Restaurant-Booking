@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -24,11 +25,20 @@ const Register = () => {
       });
       const data = await response.json();
       if (data.success) {
+        toast.success("Registration successful! Please login to continue.");
         navigate("/login");
       } else {
+        if (typeof data.errors === "string") {
+          toast.error(data.errors);
+        } else {
+          Object.values(data.errors).forEach((error) => {
+            toast.error(error);
+          });
+        }
         setError(data.errors);
       }
     } catch (error) {
+      toast.error("Registration failed. Please try again.");
       setError("Registration failed");
     }
   };
@@ -79,19 +89,6 @@ const Register = () => {
               </button>
             </div>
           </form>
-          {error && (
-            <div className="mt-4">
-              {typeof error === "string" ? (
-                <p className="text-red-500 text-xs italic">{error}</p>
-              ) : (
-                Object.entries(error).map(([key, value]) => (
-                  <p key={key} className="text-red-500 text-xs italic">
-                    {value}
-                  </p>
-                ))
-              )}
-            </div>
-          )}
         </motion.div>
       </div>
     </>

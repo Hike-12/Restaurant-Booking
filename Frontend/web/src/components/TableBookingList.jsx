@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Calendar } from "lucide-react";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 
 const TableBookingList = () => {
   const [bookings, setBookings] = useState([]);
@@ -77,14 +78,13 @@ const TableBookingList = () => {
 
   const handleBooking = async () => {
     if (!bookingDate || !bookingTime || selectedTables.length === 0) {
-      alert("Please select a date, time, and at least one table.");
+      toast.warn("Please select a date, time, and at least one table.");
       return;
     }
 
-    const authToken = localStorage.getItem("sessionid");
-
+    const authToken = localStorage.getItem("authToken");
     if (!authToken) {
-      alert("You need to log in to book a table.");
+      toast.error("You need to log in to book a table.");
       return;
     }
 
@@ -97,10 +97,10 @@ const TableBookingList = () => {
           headers: {
             "Content-Type": "application/json",
             "X-CSRFToken": getCsrfToken(),
-            Authorization: `Bearer ${authToken}`, // Pass the token here
+            Authorization: `Bearer ${authToken}`,
           },
           body: JSON.stringify({ table_id: tableId, timing }),
-          credentials: "include", // Ensures session is sent with request
+          credentials: "include",
         })
       );
 
@@ -111,19 +111,19 @@ const TableBookingList = () => {
       const failedBookings = results.filter((result) => result.success);
 
       if (successfulBookings.length > 0) {
-        alert(`Successfully booked ${successfulBookings.length} table(s)!`);
+        toast.success(
+          `Successfully booked ${successfulBookings.length} table(s)!`
+        );
       }
 
       if (failedBookings.length > 0) {
-        alert(
-          `Failed to book ${failedBookings.length} table(s). Please try again.`
-        );
+        toast.error(`Failed to book ${failedBookings.length} table(s)`);
       }
 
       fetchBookings();
     } catch (error) {
       console.error("Error booking tables:", error);
-      alert("An error occurred while booking the tables. Please try again.");
+      toast.error("An error occurred while booking the tables. Please try again.");
     }
   };
 
