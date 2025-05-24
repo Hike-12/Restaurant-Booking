@@ -37,7 +37,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Espresso",
                 cost=350.00,
-                img="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1510591509098-f4fdc6d0ff04?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Rich, bold espresso shot - the heart of great coffee.",
                 calories=5
             )
@@ -45,7 +45,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Cappuccino",
                 cost=450.00,
-                img="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1572442388796-11668a67e53d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Espresso with steamed milk and thick, creamy foam.",
                 calories=120
             )
@@ -53,7 +53,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Latte",
                 cost=500.00,
-                img="https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Smooth espresso with perfectly steamed milk and latte art.",
                 calories=150
             )
@@ -61,7 +61,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Americano",
                 cost=400.00,
-                img="https://images.unsplash.com/photo-1497636577773-f1231844b336?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Espresso with hot water for a smooth, clean coffee experience.",
                 calories=10
             )
@@ -69,7 +69,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Mocha",
                 cost=550.00,
-                img="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=400&fit=crop&auto=format",
+                img="https://plus.unsplash.com/premium_photo-1668970851336-6c81cc888ba7?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bW9jaGF8ZW58MHx8MHx8fDA%3D",
                 description="Rich espresso with chocolate syrup and steamed milk.",
                 calories=300
             )
@@ -77,7 +77,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Cold Brew",
                 cost=475.00,
-                img="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1517701604599-bb29b565090c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Smooth, refreshing cold-steeped coffee served over ice.",
                 calories=15
             )
@@ -86,7 +86,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Croissant",
                 cost=325.00,
-                img="https://images.unsplash.com/photo-1555507036-ab794f735176?w=500&h=400&fit=crop&auto=format",
+                img="https://plus.unsplash.com/premium_photo-1674562179816-04fda3958c12?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                 description="Buttery, flaky French pastry - perfect with coffee.",
                 calories=280
             )
@@ -94,7 +94,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Blueberry Muffin",
                 cost=375.00,
-                img="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Fresh baked muffin bursting with juicy blueberries.",
                 calories=320
             )
@@ -102,7 +102,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Grilled Chicken Salad",
                 cost=900.00,
-                img="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1540420773420-3366772f4999?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Fresh greens with grilled chicken.",
                 calories=350
             )
@@ -110,7 +110,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Margherita Pizza",
                 cost=750.00,
-                img="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1604068549290-dea0e4a305ca?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Classic pizza with mozzarella and basil.",
                 calories=800
             )
@@ -118,15 +118,15 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Chicken Burger",
                 cost=1050.00,
-                img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=400&fit=crop&auto=format",
-                description="Juicy beef patty with lettuce and tomato.",
+                img="https://images.unsplash.com/photo-1571091718767-18b5b1457add?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
+                description="Juicy chicken patty with lettuce and tomato.",
                 calories=950
             )
             
             Menu.objects.create(
                 item="Veggie Wrap",
                 cost=675.00,
-                img="https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1630914441316-6d95bbd00caf?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8dmVnZ2llJTIwd3JhcHxlbnwwfHwwfHx8MA%3D%3D",
                 description="Whole wheat wrap with mixed veggies.",
                 calories=400
             )
@@ -134,7 +134,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Pasta Alfredo",
                 cost=975.00,
-                img="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8cGFzdGF8ZW58MHx8MHx8fDA%3D",
                 description="Creamy Alfredo sauce over fettuccine",
                 calories=900
             )
@@ -142,7 +142,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Lamb Kebabs",
                 cost=1125.00,
-                img="https://images.unsplash.com/photo-1529193591184-b1d58069ecdd?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Grilled lamb skewers with herbs.",
                 calories=600
             )
@@ -150,7 +150,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Sushi Platter",
                 cost=1350.00,
-                img="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Assorted sushi rolls and nigiri.",
                 calories=500
             )
@@ -158,7 +158,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Tomato Soup",
                 cost=450.00,
-                img="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Creamy tomato soup with basil.",
                 calories=200
             )
@@ -166,7 +166,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Chocolate Brownie",
                 cost=375.00,
-                img="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Rich and fudgy chocolate brownie.",
                 calories=450
             )
@@ -174,7 +174,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Avocado Toast",
                 cost=600.00,
-                img="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&h=400&fit=crop&auto=format",
+                img="https://images.unsplash.com/photo-1525351484163-7529414344d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80",
                 description="Toast topped with mashed avocado and seasoning.",
                 calories=300
             )
@@ -212,42 +212,42 @@ class Command(BaseCommand):
                 name="Gordon Ramsay",
                 availability="9 am to 5 pm",
                 cuisine="English",
-                img="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=500&h=500&fit=crop&auto=format"
+                img="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
             )
             
             Chef.objects.create(
                 name="Massimo Bottura",
                 availability="10 am to 6 pm",
                 cuisine="Italian",
-                img="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&h=500&fit=crop&auto=format"
+                img="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
             )
             
             Chef.objects.create(
                 name="Nobu Matsuhisa",
                 availability="11 am to 7 pm",
                 cuisine="Japanese",
-                img="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=500&h=500&fit=crop&auto=format"
+                img="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
             )
             
             Chef.objects.create(
                 name="Alain Ducasse",
                 availability="8 am to 4 pm",
                 cuisine="French",
-                img="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=500&h=500&fit=crop&auto=format"
+                img="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
             )
             
             Chef.objects.create(
                 name="Hélène Darroze",
                 availability="12 pm to 8 pm",
                 cuisine="French",
-                img="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500&h=500&fit=crop&auto=format"
+                img="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
             )
             
             Chef.objects.create(
                 name="Thomas Keller",
                 availability="7 am to 3 pm",
                 cuisine="American",
-                img="https://images.unsplash.com/photo-1566554273541-37a9ca77b91f?w=500&h=500&fit=crop&auto=format"
+                img="https://images.unsplash.com/photo-1566554273541-37a9ca77b91f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
             )
 
         # Create tables (1-15 as in your database)
