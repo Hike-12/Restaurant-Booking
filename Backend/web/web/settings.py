@@ -110,7 +110,7 @@ CORS_ALLOW_CREDENTIALS = True
 
 if ENVIRONMENT == 'production':
     CORS_ALLOWED_ORIGINS = [
-        "https://coffee-cup-gamma.vercel.app/",  # Replace with actual URL
+        "https://coffee-cup-gamma.vercel.app",  # Replace with actual URL
     ]
 else:
     CORS_ALLOWED_ORIGINS = [
