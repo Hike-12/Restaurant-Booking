@@ -57,10 +57,19 @@ def menu_list(request):
     menus = Menu.objects.all()
     data = []
     for menu in menus:
+        # Handle external URLs properly
+        img_url = menu.img.name if menu.img else ""
+        if img_url.startswith('http://') or img_url.startswith('https://'):
+            # It's an external URL, use it directly
+            img_display = img_url
+        else:
+            # It's a relative path, use Django's .url
+            img_display = menu.img.url if menu.img else ""
+            
         data.append({
             'item': menu.item,
             'cost': float(menu.cost),
-            'img': menu.img.url,
+            'img': img_display,
             'description': menu.description, 
             'calories': menu.calories,
         })
@@ -70,11 +79,25 @@ def event_list(request):
     events = Event.objects.all()
     data = []
     for event in events:
+        # Handle external URLs for event images
+        img_url = event.img.name if event.img else ""
+        if img_url.startswith('http://') or img_url.startswith('https://'):
+            img_display = img_url
+        else:
+            img_display = event.img.url if event.img else ""
+            
+        # Handle QR code URLs
+        qr_url = event.qr_code.name if event.qr_code else ""
+        if qr_url.startswith('http://') or qr_url.startswith('https://'):
+            qr_display = qr_url
+        else:
+            qr_display = event.qr_code.url if event.qr_code else None
+            
         data.append({
             'id': event.id,
             'type': event.type,
-            'img': event.img.url,
-            'qr_code': event.qr_code.url if event.qr_code else None,  # Add QR code URL if it exists
+            'img': img_display,
+            'qr_code': qr_display,
             'bookings_available': event.bookings_available,
             'bookings_left': event.bookings_left,
         })
@@ -96,15 +119,23 @@ def event_schedule_list(request):
     return JsonResponse(data, safe=False)
 
 
+# Update your chef_list function around line 98
 def chef_list(request):
     chefs = Chef.objects.all()
     data = []
     for chef in chefs:
+        # Handle external URLs for chef images
+        img_url = chef.img.name if chef.img else ""
+        if img_url.startswith('http://') or img_url.startswith('https://'):
+            img_display = img_url
+        else:
+            img_display = chef.img.url if chef.img else ""
+            
         data.append({
             'name': chef.name,
             'availability': chef.availability,
             'cuisine': chef.cuisine,
-            'img': chef.img.url
+            'img': img_display
         })
     return JsonResponse(data, safe=False)
 
@@ -321,29 +352,33 @@ def add_review(request):
     
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
+# Update user_registered_events function around line 323
 def user_registered_events(request):
     if not request.user.is_authenticated:
         return JsonResponse({'error': 'User not authenticated'}, status=401)
     
-    # Fetch registrations for the current authenticated user
     registrations = EventRegistration.objects.filter(user=request.user)
-    
     events = []
     
     for reg in registrations:
-        # Get the event schedule (if it exists)
         event_schedule = EventSchedule.objects.filter(event=reg.event).first()
         
+        # Handle external URLs for event images
+        img_url = reg.event.img.name if reg.event.img else ""
+        if img_url.startswith('http://') or img_url.startswith('https://'):
+            img_display = img_url
+        else:
+            img_display = reg.event.img.url if reg.event.img else ""
+        
         event_data = {
-            'id':reg.event.id,
+            'id': reg.event.id,
             'event_type': reg.event.type,
-            'event_img': reg.event.img.url,  # Assuming media files are set up properly
+            'event_img': img_display,
             'bookings_available': reg.event.bookings_available,
             'bookings_left': reg.event.bookings_left,
             'is_in_queue': reg.is_in_queue,
         }
         
-        # If an event schedule exists, add its timing to the response
         if event_schedule:
             event_data['event_date'] = event_schedule.timing
         
