@@ -31,7 +31,7 @@ const VRScene = () => {
             embedded
             style={{ width: "100vw", height: "70vh", borderRadius: "1.5rem", overflow: "hidden" }}
           >
-            <a-sky src="src/assets/coffee4.jpg" rotation="0 -130 0"></a-sky>
+            <a-sky src="/coffee4.jpg" rotation="0 -130 0"></a-sky>
             <a-entity
               camera
               position="0 1.6 0"
