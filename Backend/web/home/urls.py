@@ -19,7 +19,6 @@ from django.conf.urls.static import static
 from django.urls import path,include
 from . import views
 
-
 urlpatterns = [
     path('api/chatbot/', views.chatbot, name='chatbot'),
     path('api/cancel-registration/<int:event_id>/', views.cancel_registration, name='cancel_registration'),
