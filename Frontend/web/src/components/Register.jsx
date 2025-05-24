@@ -48,7 +48,7 @@ const Register = () => {
     <>
       <div className="relative w-full h-screen flex items-center justify-center bg-sand">
         {/* Background Image Container */}
-         <div className="absolute inset-0 bg-[url('/background.jpg')] bg-cover bg-center filter blur-sm opacity-30"></div>
+         <div className="absolute inset-0 bg-[url('/background.jpg')] bg-cover bg-center filter blur-sm"></div>
         {/* Content Container */}
         <motion.div
           className="relative bg-beige/95 shadow-2xl rounded-2xl p-10 max-w-sm w-full border-2 border-olive"
