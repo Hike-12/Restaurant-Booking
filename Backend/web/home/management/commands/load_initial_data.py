@@ -35,6 +35,71 @@ class Command(BaseCommand):
             self.stdout.write('Creating menu items...')
             
             Menu.objects.create(
+                item="Espresso",
+                cost=350.00,
+                img="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=500&h=400&fit=crop&auto=format",
+                description="Rich, bold espresso shot - the heart of great coffee.",
+                calories=5
+            )
+            
+            Menu.objects.create(
+                item="Cappuccino",
+                cost=450.00,
+                img="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=500&h=400&fit=crop&auto=format",
+                description="Espresso with steamed milk and thick, creamy foam.",
+                calories=120
+            )
+            
+            Menu.objects.create(
+                item="Latte",
+                cost=500.00,
+                img="https://images.unsplash.com/photo-1561882468-9110e03e0f78?w=500&h=400&fit=crop&auto=format",
+                description="Smooth espresso with perfectly steamed milk and latte art.",
+                calories=150
+            )
+            
+            Menu.objects.create(
+                item="Americano",
+                cost=400.00,
+                img="https://images.unsplash.com/photo-1497636577773-f1231844b336?w=500&h=400&fit=crop&auto=format",
+                description="Espresso with hot water for a smooth, clean coffee experience.",
+                calories=10
+            )
+            
+            Menu.objects.create(
+                item="Mocha",
+                cost=550.00,
+                img="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500&h=400&fit=crop&auto=format",
+                description="Rich espresso with chocolate syrup and steamed milk.",
+                calories=300
+            )
+            
+            Menu.objects.create(
+                item="Cold Brew",
+                cost=475.00,
+                img="https://images.unsplash.com/photo-1517701604599-bb29b565090c?w=500&h=400&fit=crop&auto=format",
+                description="Smooth, refreshing cold-steeped coffee served over ice.",
+                calories=15
+            )
+            
+            # COFFEE SHOP PASTRIES & SNACKS
+            Menu.objects.create(
+                item="Croissant",
+                cost=325.00,
+                img="https://images.unsplash.com/photo-1555507036-ab794f735176?w=500&h=400&fit=crop&auto=format",
+                description="Buttery, flaky French pastry - perfect with coffee.",
+                calories=280
+            )
+            
+            Menu.objects.create(
+                item="Blueberry Muffin",
+                cost=375.00,
+                img="https://images.unsplash.com/photo-1607958996333-41aef7caefaa?w=500&h=400&fit=crop&auto=format",
+                description="Fresh baked muffin bursting with juicy blueberries.",
+                calories=320
+            )
+            
+            Menu.objects.create(
                 item="Grilled Chicken Salad",
                 cost=900.00,
                 img="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&h=400&fit=crop&auto=format",
@@ -51,7 +116,7 @@ class Command(BaseCommand):
             )
             
             Menu.objects.create(
-                item="Beef Burger",
+                item="Chicken Burger",
                 cost=1050.00,
                 img="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=400&fit=crop&auto=format",
                 description="Juicy beef patty with lettuce and tomato.",
@@ -61,7 +126,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Veggie Wrap",
                 cost=675.00,
-                img="https://images.unsplash.com/photo-1565299585323-38174c4a6f52?w=500&h=400&fit=crop&auto=format",
+                img="https://unsplash.com/photos/green-vegetable-on-white-ceramic-plate--g7wQeusJsg?w=500&h=400&fit=crop&auto=format",
                 description="Whole wheat wrap with mixed veggies.",
                 calories=400
             )
@@ -69,7 +134,7 @@ class Command(BaseCommand):
             Menu.objects.create(
                 item="Pasta Alfredo",
                 cost=975.00,
-                img="https://images.unsplash.com/photo-1621996346565-e3dbc353d2e5?w=500&h=400&fit=crop&auto=format",
+                img="https://unsplash.com/photos/potato-fries-on-white-ceramic-plate-flFd8L7_B3g?w=500&h=400&fit=crop&auto=format",
                 description="Creamy Alfredo sauce over fettuccine",
                 calories=900
             )
@@ -154,28 +219,28 @@ class Command(BaseCommand):
                 name="Massimo Bottura",
                 availability="10 am to 6 pm",
                 cuisine="Italian",
-                img="https://images.unsplash.com/photo-1583394838336-acd977736f90?w=500&h=500&fit=crop&auto=format"
+                img="https://unsplash.com/photos/a-man-cooking-on-a-stove-in-a-kitchen-Cjb5C2DKXUs?w=500&h=500&fit=crop&auto=format"
             )
             
             Chef.objects.create(
                 name="Nobu Matsuhisa",
                 availability="11 am to 7 pm",
                 cuisine="Japanese",
-                img="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?w=500&h=500&fit=crop&auto=format"
+                img="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=500&h=500&fit=crop&auto=format"
             )
             
             Chef.objects.create(
                 name="Alain Ducasse",
                 availability="8 am to 4 pm",
                 cuisine="French",
-                img="https://images.unsplash.com/photo-1595273670150-bd0c3c392e46?w=500&h=500&fit=crop&auto=format"
+                img="https://unsplash.com/photos/man-holding-fish-dish-on-plate-e5Q5vWO55uU?w=500&h=500&fit=crop&auto=format"
             )
             
             Chef.objects.create(
                 name="Hélène Darroze",
                 availability="12 pm to 8 pm",
                 cuisine="French",
-                img="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=500&h=500&fit=crop&auto=format"
+                img="https://unsplash.com/photos/a-woman-cooking-food-in-a-large-pot-uD4MZxSjS64?w=500&h=500&fit=crop&auto=format"
             )
             
             Chef.objects.create(
