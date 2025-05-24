@@ -101,7 +101,7 @@ def event_list(request):
         img_display = get_image_url(event.img)
         
         # Generate QR code URL dynamically using online service
-        event_url = f"https://coffee-cup-gamma.vercel.app/events/{event.id}/register"
+        event_url = f"https://coffee-cup-gamma.vercel.app/event-schedules?eventId={event.id}"
         qr_code_url = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={quote(event_url)}"
         
         data.append({
