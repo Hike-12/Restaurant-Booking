@@ -3,9 +3,6 @@ import { motion } from 'framer-motion';
 import { useImageCache } from '../hooks/useImageCache';
 import { VITE_API_BASE_URL } from '../config/api';
 
-/**
- * Optimized image component with loading state
- */
 const OptimizedImage = ({
   src,
   alt,
@@ -18,20 +15,27 @@ const OptimizedImage = ({
   loadingComponent = null,
   onLoad = () => {},
 }) => {
-  // Process the src if it's a relative path from the API
-  const fullSrc = src && src.startsWith('http') ? src : `${VITE_API_BASE_URL.replace('/api', '')}${src}`;
+  // Process the src - if it's already a full URL, use it as is
+  const fullSrc = React.useMemo(() => {
+    if (!src) return '';
+    
+    // If it's already a full URL (starts with http), use it directly
+    if (src.startsWith('http://') || src.startsWith('https://')) {
+      return src;
+    }
+    
+    // If it's a relative path from the API, prepend the API base URL
+    return `${VITE_API_BASE_URL.replace('/api', '')}${src}`;
+  }, [src]);
   
-  // Use the image cache hook
   const { loading, error, imageSrc } = useImageCache(fullSrc);
 
-  // Call onLoad callback when image is loaded
   React.useEffect(() => {
     if (!loading && !error) {
       onLoad();
     }
   }, [loading, error, onLoad]);
 
-  // Default loading placeholder
   const defaultLoadingComponent = (
     <div 
       style={{ 
@@ -45,10 +49,8 @@ const OptimizedImage = ({
 
   return (
     <div className={`relative overflow-hidden ${containerClassName}`} style={{ width, height }}>
-      {/* Show loading component while image is loading */}
       {loading && (loadingComponent || defaultLoadingComponent)}
       
-      {/* Show the actual image */}
       {!loading && !error && (
         <motion.img
           src={imageSrc}
@@ -61,7 +63,6 @@ const OptimizedImage = ({
         />
       )}
       
-      {/* Show error state */}
       {error && (
         <div className="flex items-center justify-center w-full h-full bg-red-100 text-red-500 text-sm p-2 rounded">
           Failed to load image
