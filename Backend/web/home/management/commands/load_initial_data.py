@@ -219,7 +219,7 @@ class Command(BaseCommand):
                 name="Massimo Bottura",
                 availability="10 am to 6 pm",
                 cuisine="Italian",
-                img="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                img="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGNoZWZ8ZW58MHx8MHx8fDA%3D"
             )
             
             Chef.objects.create(
@@ -233,14 +233,14 @@ class Command(BaseCommand):
                 name="Alain Ducasse",
                 availability="8 am to 4 pm",
                 cuisine="French",
-                img="https://images.unsplash.com/photo-1607631568010-a87245c0daf8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                img="https://images.unsplash.com/photo-1574966740793-953ad374e8fe?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             )
             
             Chef.objects.create(
                 name="Hélène Darroze",
                 availability="12 pm to 8 pm",
                 cuisine="French",
-                img="https://images.unsplash.com/photo-1559339352-11d035aa65de?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80"
+                img="https://plus.unsplash.com/premium_photo-1664475872802-c8b87eec84b8?w=600&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8aXRhbGlhbiUyMGNoZWZ8ZW58MHx8MHx8fDA%3D"
             )
             
             Chef.objects.create(
