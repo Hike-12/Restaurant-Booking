@@ -12,27 +12,30 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
-from web.middleware import JsonAuthMiddleware
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-mrs#irsy(n+)n4c#cvl)7*gz#9gsv(!!_ig1xr0r314n_w@+)&'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-mrs#irsy(n+)n4c#cvl)7*gz#9gsv(!!_ig1xr0r314n_w@+)&')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-ALLOWED_HOSTS = []
+# Environment detection
+ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
 
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'your-app-name.onrender.com',  # Replace with your actual Render URL
+    '.vercel.app',  # Allow Vercel domains
+]
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -47,13 +50,14 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # For static files in production
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'web.middleware.JsonAuthMiddleware'
+    'web.middleware.JsonAuthMiddleware'  # Remove the import from top
 ]
 
 ROOT_URLCONF = 'web.urls'
@@ -76,17 +80,29 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'web.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+# Production database (PostgreSQL)
+if ENVIRONMENT == 'production':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('DATABASE_NAME'),
+            'USER': os.environ.get('DATABASE_USER'),
+            'PASSWORD': os.environ.get('DATABASE_PASSWORD'),
+            'HOST': os.environ.get('DATABASE_HOST'),
+            'PORT': os.environ.get('DATABASE_PORT', '5432'),
+        }
     }
-}
-
+else:
+    # Development database (SQLite)
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
@@ -106,63 +122,118 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Media files
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
-
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# CORS_ALLOWED_ORIGINS = [
-#     "http://localhost:5173",
-# ]
-# CORS_ALLOW_CREDENTIALS = True 
-CORS_ORIGIN_WHITELIST = [
-    "http://localhost:5173",  # Update this to match your frontend
-]
-
-# SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default session backend
-
-# SESSION_COOKIE_SAMESITE = 'None'  # Adjust if necessary for your frontend 
-# SESSION_COOKIE_SECURE = False  # Set to True if you're using HTTPS
-# SESSION_COOKIE_HTTPONLY = True
-# SESSION_EXPIRE_AT_BROWSER_CLOSE = False
-
-SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # or another backend of your choice
-SESSION_COOKIE_SECURE = True  # for HTTPS connections
-SESSION_COOKIE_HTTPONLY = True
-SESSION_COOKIE_SAMESITE = 'None'  # Needed for cross-origin requests
-CSRF_COOKIE_SECURE = True
-CSRF_COOKIE_HTTPONLY = True
-CSRF_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_AGE = 1209600  # Two weeks in seconds
-SESSION_COOKIE_NAME = "sessionid"  # Make sure session cookies are correctly set
-CSRF_COOKIE_NAME = "csrftoken"  # CSRF token
-
-# For development only (remove in production):
+# CORS Configuration
 CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOW_ALL_ORIGINS = True
-TIME_ZONE = 'UTC'
 
+if ENVIRONMENT == 'production':
+    # Production CORS settings
+    CORS_ALLOWED_ORIGINS = [
+        "https://your-frontend-app.vercel.app",  # Replace with your actual Vercel URL
+    ]
+else:
+    # Development CORS settings
+    CORS_ALLOWED_ORIGINS = [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+    ]
+
+# Session Configuration
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_AGE = 1209600  # Two weeks in seconds
+SESSION_COOKIE_NAME = "sessionid"
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False
+
+# CSRF Configuration
+CSRF_COOKIE_NAME = "csrftoken"
+
+# Security settings based on environment
+if ENVIRONMENT == 'production':
+    # Production security settings
+    SESSION_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'None'
+    CSRF_COOKIE_SECURE = True
+    CSRF_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_SAMESITE = 'None'
+    
+    # Additional production security
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    
+else:
+    # Development security settings
+    SESSION_COOKIE_SECURE = False
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = 'Lax'
+    CSRF_COOKIE_SECURE = False
+    CSRF_COOKIE_HTTPONLY = True
+    CSRF_COOKIE_SAMESITE = 'Lax'
+
+# Login configuration
 LOGIN_URL = '/api/login/'
+
+# Static files storage for production
+if ENVIRONMENT == 'production':
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Logging configuration
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+        },
+        'home': {  # Your app name
+            'handlers': ['console'],
+            'level': 'DEBUG' if DEBUG else 'INFO',
+            'propagate': False,
+        },
+    },
+}
+
+# Google API Configuration (if needed)
+GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
