@@ -26,8 +26,8 @@ const EventList = () => {
 
         // Preload all event images to speed up rendering
         const imageUrls = data.flatMap((event) => [
-          `http://127.0.0.1:8000${event.img}`,
-          `http://127.0.0.1:8000${event.qr_code}`,
+          `${VITE_API_BASE_URL.replace('/api', '')}${event.img}`,
+          `${VITE_API_BASE_URL.replace('/api', '')}${event.qr_code}`,
         ]);
         preloadImages(imageUrls);
       } catch (err) {

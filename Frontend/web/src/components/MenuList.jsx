@@ -23,7 +23,7 @@ const MenuList = () => {
         setMenus(data);
 
         // Preload all menu images
-        const imageUrls = data.map((menu) => `http://127.0.0.1:8000${menu.img}`);
+        const imageUrls = data.map((menu) => `${VITE_API_BASE_URL.replace('/api', '')}${menu.img}`);
         preloadImages(imageUrls);
       } catch (err) {
         setError(err.message);

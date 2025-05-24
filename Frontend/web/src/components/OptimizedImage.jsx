@@ -18,7 +18,7 @@ const OptimizedImage = ({
   onLoad = () => {},
 }) => {
   // Process the src if it's a relative path from the API
-  const fullSrc = src && src.startsWith('http') ? src : `http://127.0.0.1:8000${src}`;
+  const fullSrc = src && src.startsWith('http') ? src : `${VITE_API_BASE_URL.replace('/api', '')}${src}`;
   
   // Use the image cache hook
   const { loading, error, imageSrc } = useImageCache(fullSrc);
