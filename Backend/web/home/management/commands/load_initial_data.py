@@ -196,42 +196,52 @@ class Command(BaseCommand):
         if not Review.objects.exists():
             self.stdout.write('Creating sample reviews...')
             
-            # Create reviews without user reference first (guest reviews)
-            Review.objects.create(
-                reviewer_name="John Doe",
-                rating=5,
-                comment="It was a wonderful Experience"
-            )
-            
-            Review.objects.create(
-                reviewer_name="Jane Smith",
-                rating=5,
-                comment="Great Ambience"
-            )
-            
-            Review.objects.create(
-                reviewer_name="Mike Johnson",
-                rating=5,
-                comment="Amazing food and service!"
-            )
-            
-            Review.objects.create(
-                reviewer_name="Emily Davis",
-                rating=5,
-                comment="Had a Great Time"
-            )
-            
-            Review.objects.create(
-                reviewer_name="Alex Wilson",
-                rating=5,
-                comment="Brilliant atmosphere and delicious food"
-            )
-            
-            Review.objects.create(
-                reviewer_name="Sarah Brown",
-                rating=4,
-                comment="Excellent service and delicious food. Will definitely come back!"
-            )
+            # Get users to associate with reviews
+            try:
+                user1 = User.objects.get(username='Aliqyaan')
+                user2 = User.objects.get(username='Romeiro')
+                user3 = User.objects.get(username='Gavin')
+                
+                Review.objects.create(
+                    user=user1,
+                    rating=5,
+                    comment="It was a wonderful Experience"
+                )
+                
+                Review.objects.create(
+                    user=user2,
+                    rating=5,
+                    comment="Great Ambience"
+                )
+                
+                Review.objects.create(
+                    user=user3,
+                    rating=5,
+                    comment="Amazing food and service!"
+                )
+                
+                Review.objects.create(
+                    user=user1,
+                    rating=5,
+                    comment="Had a Great Time"
+                )
+                
+                Review.objects.create(
+                    user=user2,
+                    rating=5,
+                    comment="Brilliant atmosphere and delicious food"
+                )
+                
+                Review.objects.create(
+                    user=user3,
+                    rating=4,
+                    comment="Excellent service and delicious food. Will definitely come back!"
+                )
+                
+            except User.DoesNotExist:
+                self.stdout.write(
+                    self.style.WARNING('Users not found for reviews. Skipping review creation.')
+                )
 
         # Create event schedules
         if not EventSchedule.objects.exists():
