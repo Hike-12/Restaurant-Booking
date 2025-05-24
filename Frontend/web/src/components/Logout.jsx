@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -25,14 +26,21 @@ const Logout = () => {
 
       const data = await response.json();
       if (data.success) {
+        toast.success("Logged out successfully!");
         navigate("/login");
       } else {
-        console.error("Logout failed:", data.message);
+        toast.error("Logout failed: " + data.message);
       }
     } catch (error) {
       console.error("Logout failed", error);
+      toast.error("Logout failed. Please try again.");
     }
   };
+
+  useEffect(() => {
+    performLogout();
+  }, []);
+
   return <div>Logging out...</div>;
 };
 

@@ -268,7 +268,7 @@ def cancel_registration(request, event_id):
                 next_in_queue.is_in_queue = False
                 next_in_queue.save()
             else:
-                event.bookings_left = event.bookings_left - 1
+                event.bookings_left = event.bookings_left + 1
                 event.save()
 
             return JsonResponse({'message': 'Event canceled and queue updated successfully.'}, status=200)
@@ -307,13 +307,19 @@ def get_reviews(request):
 @csrf_exempt
 def add_review(request):
     if request.method == 'POST':
+        # Check if user is authenticated
+        if not request.user.is_authenticated:
+            return JsonResponse({'error': 'You must be logged in to add a review'}, status=401)
+        
         data = json.loads(request.body)
-        user = User.objects.get(id=data['user_id'])
+        user = request.user  # Use the authenticated user
         rating = data['rating']
         comment = data['comment']
 
         review = Review.objects.create(user=user, rating=rating, comment=comment)
         return JsonResponse({'status': 'Review added successfully'})
+    
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 def user_registered_events(request):
     if not request.user.is_authenticated:

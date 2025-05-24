@@ -10,13 +10,13 @@ const AddReview = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
 
-    const reviewData = {
-      user_id: 1, // Replace with dynamic user ID in production
-      rating,
-      comment,
-    };
+    if (rating === 0) {
+      toast.warn("Please select a rating");
+      return;
+    }
+
+    setIsSubmitting(true);
 
     try {
       const response = await fetch("http://127.0.0.1:8000/api/add-review/", {
@@ -24,16 +24,25 @@ const AddReview = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(reviewData),
+        credentials: "include", // Important: Include cookies for session authentication
+        body: JSON.stringify({
+          // Remove user_id from here
+          rating: rating,
+          comment: comment,
+        }),
       });
 
-      const result = await response.json();
-      console.log("Review added:", result);
-      toast.success("Review submitted successfully!");
-      setComment("");
+      if (response.ok) {
+        toast.success("Review added successfully!");
+        setRating(5);
+        setComment("");
+      } else {
+        const errorData = await response.json();
+        toast.error("Error: " + (errorData.error || "Failed to add review"));
+      }
     } catch (error) {
-      console.error("Error adding review:", error);
-      toast.error("Error submitting review. Please try again.");
+      console.error("Error:", error);
+      toast.error("Network error occurred");
     } finally {
       setIsSubmitting(false);
     }
