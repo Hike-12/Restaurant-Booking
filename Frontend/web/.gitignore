@@ -22,6 +22,30 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-*.pyc
-__pycache__/
-.env
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Service worker (now in public)
+src/service-worker.js
+
+# Build outputs
+build/
+.next/
+out/
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Optional npm cache directory
+.npm
+
+# Optional eslint cache
+.eslintcache
+
+# Vercel
+.vercel
