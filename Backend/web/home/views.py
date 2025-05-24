@@ -17,6 +17,7 @@ from django.utils import timezone
 from datetime import datetime
 from django.utils import timezone
 from dotenv import load_dotenv
+from urllib.parse import quote
 
 load_dotenv()
 
