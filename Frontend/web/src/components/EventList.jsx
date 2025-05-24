@@ -5,6 +5,7 @@ import { Calendar, Users, QrCode, ArrowRight } from "lucide-react";
 import { Spinner } from "./Spinner";
 import OptimizedImage from "./OptimizedImage";
 import { preloadImages } from "../hooks/useImageCache";
+import { VITE_API_BASE_URL } from "../config/api";
 
 const EventList = () => {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ const EventList = () => {
     const fetchEvents = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("http://127.0.0.1:8000/api/events/");
+        const response = await fetch(`${VITE_API_BASE_URL}/events/`);
         if (!response.ok) {
           throw new Error("Failed to fetch events");
         }

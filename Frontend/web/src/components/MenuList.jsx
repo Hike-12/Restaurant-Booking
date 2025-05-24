@@ -4,6 +4,7 @@ import { Coffee, DollarSign, Flame, UtensilsCrossed } from "lucide-react";
 import { Spinner } from "./Spinner";
 import OptimizedImage from "./OptimizedImage";
 import { preloadImages } from "../hooks/useImageCache";
+import { VITE_API_BASE_URL } from "../config/api";
 
 const MenuList = () => {
   const [menus, setMenus] = useState([]);
@@ -14,7 +15,7 @@ const MenuList = () => {
     const fetchMenus = async () => {
       try {
         setIsLoading(true);
-        const response = await fetch("http://127.0.0.1:8000/api/menus/");
+        const response = await fetch(`${VITE_API_BASE_URL}/menus/`);
         if (!response.ok) {
           throw new Error("Failed to fetch menus");
         }

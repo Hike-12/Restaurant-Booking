@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import { Calendar, Clock, Users, CalendarCheck, AlertCircle, Loader } from "lucide-react";
 import UserEvents from "./UserEvents";
 import { motion } from "framer-motion";
+import { VITE_API_BASE_URL } from "../config/api";
 
 // Helper function to get CSRF token
 const getCsrfToken = () => {
@@ -24,7 +25,7 @@ const EventScheduleList = () => {
     if (eventId) {
       try {
         const response = await fetch(
-          `http://127.0.0.1:8000/api/event-schedules/?eventId=${eventId}`
+          `${VITE_API_BASE_URL}/event-schedules/?eventId=${eventId}`
         );
         const data = await response.json();
         setSchedules(data);
@@ -39,7 +40,7 @@ const EventScheduleList = () => {
     setIsLoading(true);
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/event-schedules/${scheduleId}/register/`,
+        `${VITE_API_BASE_URL}/event-schedules/${scheduleId}/register/`,
         {
           method: "POST",
           credentials: "include", // Include session cookies

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { VITE_API_BASE_URL } from "../config/api";
 
 const Register = () => {
   const [username, setUsername] = useState("");
@@ -12,7 +13,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/register/", {
+      const response = await fetch(`${VITE_API_BASE_URL}/register/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

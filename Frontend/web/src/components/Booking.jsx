@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CalendarCheck, Loader2 } from 'lucide-react';
 import { toast } from 'react-toastify';
+import { VITE_API_BASE_URL } from '../config/api';
 
 const BookingForm = () => {
     const { scheduleId } = useParams();
@@ -14,7 +15,7 @@ const BookingForm = () => {
         setIsLoading(true);
         setError('');
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/book-table/${scheduleId}/`, {
+            const response = await fetch(`${VITE_API_BASE_URL}/book-table/${scheduleId}/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -9,13 +9,14 @@ const getCsrfToken = () => {
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { CalendarCheck } from 'lucide-react';
+import { VITE_API_BASE_URL } from '../config/api';
 
 const EventRegistration = ({ eventId }) => {
     const [status, setStatus] = useState(null);
 
     const registerForEvent = async () => {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/api/events/${eventId}/register/`, {
+            const response = await fetch(`${VITE_API_BASE_URL}/events/${eventId}/register/`, {
                 method: 'POST',
                 credentials: 'include',  // Include session cookies
                 headers: {

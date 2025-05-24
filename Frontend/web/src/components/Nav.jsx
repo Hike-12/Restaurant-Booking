@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, User, LogOut } from "lucide-react";
 import { toast } from 'react-toastify';
+import { VITE_API_BASE_URL } from "../config/api";
 
 function Nav() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -29,7 +30,7 @@ function Nav() {
 
   const handleLogout = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/logout/", {
+      const response = await fetch(`${VITE_API_BASE_URL}/logout/`, {
         method: "POST",
         credentials: "include", // Include cookies for session
         headers: {
@@ -40,6 +41,7 @@ function Nav() {
 
       const data = await response.json();
       if (data.success) {
+        localStorage.clear(); // Clear all localStorage items
         // Clear the authentication status from localStorage
         localStorage.removeItem("isAuthenticated");
         setIsAuthenticated(false); // Update state to reflect logout

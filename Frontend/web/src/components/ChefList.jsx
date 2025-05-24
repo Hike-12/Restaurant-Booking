@@ -3,12 +3,13 @@ import ChefCard from "./ChefCard";
 import { motion } from "framer-motion";
 import { useQuery } from "@tanstack/react-query";
 import { Spinner } from "./Spinner";
+import { VITE_API_BASE_URL } from "../config/api";
 
 const ChefList = () => {
   const { data: chefs = [], isLoading, error } = useQuery({
     queryKey: ["chefs"],
     queryFn: async () => {
-      const response = await fetch("http://127.0.0.1:8000/api/chefs/");
+      const response = await fetch(`${VITE_API_BASE_URL}/chefs/`);
       if (!response.ok) {
         throw new Error("Failed to fetch chefs");
       }

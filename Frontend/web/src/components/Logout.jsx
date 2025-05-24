@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { VITE_API_BASE_URL } from "../config/api";
 
 const Logout = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const Logout = () => {
 
   const performLogout = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/logout/", {
+      const response = await fetch(`${VITE_API_BASE_URL}/logout/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

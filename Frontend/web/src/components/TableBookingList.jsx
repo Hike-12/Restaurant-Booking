@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Calendar } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { VITE_API_BASE_URL } from "../config/api";
 
 const TableBookingList = () => {
   const [bookings, setBookings] = useState([]);
@@ -29,7 +30,7 @@ const TableBookingList = () => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/table-bookings/",
+        `${VITE_API_BASE_URL}/table-bookings/`,
         {
           method: "POST",
           headers: {
@@ -92,7 +93,7 @@ const TableBookingList = () => {
 
     try {
       const bookingPromises = selectedTables.map((tableId) =>
-        fetch("http://127.0.0.1:8000/api/book-table/", {
+        fetch(`${VITE_API_BASE_URL}/book-table/`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

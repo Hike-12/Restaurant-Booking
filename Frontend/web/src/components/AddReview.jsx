@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Star, Send } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { VITE_API_BASE_URL } from "../config/api"; // Adjust the import based on your project structure
 
 const AddReview = () => {
   const [rating, setRating] = useState(5);
@@ -19,7 +20,7 @@ const AddReview = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/add-review/", {
+      const response = await fetch(`${VITE_API_BASE_URL}/add-review/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

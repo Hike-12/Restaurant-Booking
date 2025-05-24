@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Calendar, Users, CheckCircle, AlertCircle, X, Clock } from "lucide-react";
 import { motion } from "framer-motion";
 import { toast } from "react-toastify";
+import { VITE_API_BASE_URL } from "../config/api";
 
 const UserEvents = () => {
   const [events, setEvents] = useState([]);
@@ -11,7 +12,7 @@ const UserEvents = () => {
     const fetchRegisteredEvents = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user-registered-events/",
+          `${VITE_API_BASE_URL}/user-registered-events/`,
           {
             method: "GET",
             credentials: "include", // Sends cookies for authenticated requests
@@ -33,7 +34,7 @@ const UserEvents = () => {
   const cancelEvent = async (eventId) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/cancel-registration/${eventId}/`,
+        `${VITE_API_BASE_URL}/cancel-registration/${eventId}/`,
         {
           method: "POST",
           credentials: "include",
@@ -54,7 +55,7 @@ const UserEvents = () => {
   const getQueuePosition = async (eventId) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/queue-position/${eventId}/`,
+        `${VITE_API_BASE_URL}/queue-position/${eventId}/`,
         {
           method: "GET",
           credentials: "include",

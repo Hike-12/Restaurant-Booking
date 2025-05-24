@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Send } from "lucide-react";
 import { motion } from "framer-motion";
+import { VITE_API_BASE_URL } from "../config/api";
 
 const Chatbot = () => {
   const [userMessage, setUserMessage] = useState("");
@@ -37,7 +38,7 @@ const Chatbot = () => {
     setUserMessage(""); // Clear input
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/chatbot/", {
+      const response = await fetch(`${VITE_API_BASE_URL}/chatbot/`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

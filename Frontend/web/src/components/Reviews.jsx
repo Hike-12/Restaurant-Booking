@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import AddReview from "./AddReview";
 import { Star, Calendar } from "lucide-react";
 import { motion } from "framer-motion";
+import { VITE_API_BASE_URL } from "../config/api";
 
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -9,7 +10,7 @@ const Reviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/reviews/");
+        const response = await fetch(`${VITE_API_BASE_URL}/reviews/`);
         const data = await response.json();
         setReviews(data);
       } catch (error) {
