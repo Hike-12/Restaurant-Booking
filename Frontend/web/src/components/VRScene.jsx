@@ -1,24 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import 'aframe';
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Video } from "lucide-react";
 
 const VRScene = () => {
-  useEffect(() => {
-    // Dynamically load A-Frame script
-    const script = document.createElement('script');
-    script.src = 'https://aframe.io/releases/1.4.0/aframe.min.js';
-    script.async = true;
-    document.head.appendChild(script);
-
-    return () => {
-      // Cleanup
-      if (document.head.contains(script)) {
-        document.head.removeChild(script);
-      }
-    };
-  }, []);
-
   return (
     <motion.div
       className="min-h-screen bg-sand flex flex-col items-center justify-center"
@@ -43,18 +29,14 @@ const VRScene = () => {
         <div className="w-full flex justify-center">
           <a-scene
             embedded
-            vr-mode-ui="enabled: false"
             style={{ width: "100vw", height: "70vh", borderRadius: "1.5rem", overflow: "hidden" }}
           >
-            <a-assets>
-              <img id="coffee-panorama" src="/coffee4.jpg" crossOrigin="anonymous" />
-            </a-assets>
-            <a-sky src="#coffee-panorama" rotation="0 -130 0"></a-sky>
+            <a-sky src="/coffee4.jpg" rotation="0 -130 0"></a-sky>
             <a-entity
               camera
               position="0 1.6 0"
-              look-controls="pointerLockEnabled: false"
-              wasd-controls="enabled: false"
+              look-controls
+              wasd-controls
             ></a-entity>
             <a-entity
               cursor="fuse: false; maxDistance: 10"
@@ -70,3 +52,4 @@ const VRScene = () => {
 };
 
 export default VRScene;
+
