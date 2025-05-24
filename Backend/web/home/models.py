@@ -37,8 +37,9 @@ class Event(models.Model):
             box_size=10,
             border=4,
         )
-        # Replace with the actual URL or data you want to encode
-        qr.add_data(f'http://127.0.0.1:8000/register/{self.id}/')
+        # Use the production URL for QR codes
+        qr_url = f'https://coffee-cup-gamma.vercel.app/events/{self.id}/register'
+        qr.add_data(qr_url)
         qr.make(fit=True)
 
         img = qr.make_image(fill='black', back_color='white')
@@ -54,8 +55,11 @@ class Event(models.Model):
     def save(self, *args, **kwargs):
         # Only generate QR code on creation
         if not self.pk:  # If this is a new instance
+            super().save(*args, **kwargs)  # Save first to get ID
             self.generate_qr_code()
-        super().save(*args, **kwargs)
+            super().save(*args, **kwargs)  # Save again with QR code
+        else:
+            super().save(*args, **kwargs)
 
 # Use signals to generate QR code after saving
 @receiver(post_save, sender=Event)
