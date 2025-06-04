@@ -20,11 +20,12 @@ const EventScheduleList = () => {
   const query = new URLSearchParams(useLocation().search);
   const eventId = query.get("eventId");
   const authToken = localStorage.getItem("authToken");
+  useEffect(() => {
       if (!authToken) {
         toast.error("You need to log in to register for an event.");
         return;
       }
-
+    }, [authToken]);
   // Fetch schedules based on eventId
   const fetchSchedules = async () => {
     if (eventId) {
