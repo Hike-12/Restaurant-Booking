@@ -4,7 +4,7 @@ import { Calendar, Clock, Users, CalendarCheck, AlertCircle, Loader } from "luci
 import UserEvents from "./UserEvents";
 import { motion } from "framer-motion";
 import { VITE_API_BASE_URL } from "../config/api";
-
+import { toast } from "react-toastify";
 // Helper function to get CSRF token
 const getCsrfToken = () => {
   const name = "csrftoken";
@@ -19,6 +19,11 @@ const EventScheduleList = () => {
   const [isLoading, setIsLoading] = useState(false);
   const query = new URLSearchParams(useLocation().search);
   const eventId = query.get("eventId");
+  const authToken = localStorage.getItem("authToken");
+      if (!authToken) {
+        toast.error("You need to log in to register for an event.");
+        return;
+      }
 
   // Fetch schedules based on eventId
   const fetchSchedules = async () => {
@@ -28,7 +33,9 @@ const EventScheduleList = () => {
           `${VITE_API_BASE_URL}/event-schedules/?eventId=${eventId}`
         );
         const data = await response.json();
-        setSchedules(data);
+        console.log("Fetched schedules:", data);
+        const filteredData = data.filter(schedule => String(schedule.id) === String(eventId));
+        setSchedules(filteredData);
       } catch (error) {
         console.error("Error fetching event schedules:", error);
       }
