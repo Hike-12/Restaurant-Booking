@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Calendar, Clock, Users, CalendarCheck, AlertCircle, Loader } from "lucide-react";
 import UserEvents from "./UserEvents";
 import { motion } from "framer-motion";
@@ -20,9 +20,15 @@ const EventScheduleList = () => {
   const query = new URLSearchParams(useLocation().search);
   const eventId = query.get("eventId");
   const authToken = localStorage.getItem("authToken");
+  const navigate = useNavigate();
   useEffect(() => {
       if (!authToken) {
         toast.error("You need to log in to register for an event.");
+        // Redirect to login or handle unauthenticated state
+        setTimeout(() => {
+        navigate("/login");
+        }
+        , 2000);
         return;
       }
     }, [authToken]);
