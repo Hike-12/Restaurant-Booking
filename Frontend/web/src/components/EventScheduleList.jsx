@@ -111,7 +111,7 @@ const EventScheduleList = () => {
             </motion.div>
           )}
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="justify-self-center">
             {schedules.map((schedule, idx) => (
               <motion.div
                 key={schedule.id}

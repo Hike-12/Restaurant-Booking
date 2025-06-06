@@ -99,7 +99,6 @@ def event_list(request):
     for event in events:
         # Handle external URLs for event images
         img_display = get_image_url(event.img)
-        
         # Generate QR code URL dynamically using online service
         event_url = f"https://coffee-cup-gamma.vercel.app/event-schedules?eventId={event.id}"
         qr_code_url = f"https://api.qrserver.com/v1/create-qr-code/?size=200x200&data={quote(event_url)}"
@@ -112,6 +111,7 @@ def event_list(request):
             'bookings_available': event.bookings_available,
             'bookings_left': event.bookings_left,
         })
+        
     return JsonResponse(data, safe=False)
 
 
@@ -126,6 +126,7 @@ def event_schedule_list(request):
             'time': schedule.timing.strftime('%H:%M'),  # Extract the time
             'bookings_available': schedule.event.bookings_available,
             'bookings_left': schedule.event.bookings_left,
+            
         })
     return JsonResponse(data, safe=False)
 
