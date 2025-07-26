@@ -159,6 +159,9 @@ VITE_API_BASE_URL=http://127.0.0.1:8000/api
 - **Live URLs:**
   - Frontend: https://coffee-cup-gamma.vercel.app
   - Backend API: https://restraunt-booking.onrender.com/api
+  Sample Login:
+    username='Aliqyaan',
+    password='aliqyaan123'
 
 ## Technologies Deep Dive
 
