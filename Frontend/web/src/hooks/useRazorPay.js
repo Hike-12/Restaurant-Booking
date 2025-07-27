@@ -63,7 +63,7 @@ export const useRazorpay = () => {
 
   const verifyPayment = async (paymentData) => {
     try {
-      const response = await fetch(`${VITE_API_BASE_URL}/verify-payment/`, {
+      const response = await fetch(`${import.meta.env.VITE_API_BASE_URL}/verify-payment/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -78,10 +78,12 @@ export const useRazorpay = () => {
         toast.success('Payment successful! (Test Mode)');
         return true;
       } else {
+        console.log('Payment verification failed:', data);
         toast.error('Payment verification failed');
         return false;
       }
     } catch (error) {
+        console.error('Payment verification error:', error);
       toast.error('Payment verification error');
       return false;
     } finally {
