@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from django.shortcuts import render
-from .models import Menu, Event, EventSchedule, TableBooking, Chef, Table, EventRegistration,Review
+from .models import Menu, Event, EventSchedule, TableBooking, Chef, Table, EventRegistration,Review,Payment, Bill
 import json
+import uuid
+from django.utils.decorators import method_decorator
 from datetime import datetime
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -13,6 +15,7 @@ from django.views import View
 from django.contrib.auth.models import User
 import google.generativeai as genai
 import os
+from django.conf import settings
 from django.utils import timezone
 from datetime import datetime
 from django.utils import timezone
@@ -390,6 +393,111 @@ def user_registered_events(request):
         events.append(event_data)
 
     return JsonResponse(events, safe=False)
+
+# Test mode implementation - no real Razorpay client needed
+@method_decorator(csrf_exempt, name='dispatch')
+class CreateOrderView(View):
+    def post(self, request):
+        try:
+            data = json.loads(request.body)
+            amount = int(float(data.get('amount', 0)) * 100)  # Convert to paise
+            currency = data.get('currency', 'INR')
+            
+            # Generate test order ID
+            test_order_id = f"order_test_{uuid.uuid4().hex[:10]}"
+            
+            # Save payment record
+            payment = Payment.objects.create(
+                user=request.user if request.user.is_authenticated else None,
+                razorpay_order_id=test_order_id,
+                amount=amount / 100,  # Convert back to rupees
+                currency=currency,
+                description=data.get('description', 'Restaurant Bill Payment')
+            )
+            
+            return JsonResponse({
+                'success': True,
+                'order_id': test_order_id,
+                'amount': amount,
+                'currency': currency,
+                'key': settings.RAZORPAY_KEY_ID
+            })
+            
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+
+@method_decorator(csrf_exempt, name='dispatch')
+class VerifyPaymentView(View):
+    def post(self, request):
+        try:
+            data = json.loads(request.body)
+            
+            razorpay_order_id = data.get('razorpay_order_id')
+            razorpay_payment_id = data.get('razorpay_payment_id', f"pay_test_{uuid.uuid4().hex[:10]}")
+            razorpay_signature = data.get('razorpay_signature', f"sig_test_{uuid.uuid4().hex[:10]}")
+            
+            # In test mode, we'll always consider payment as successful
+            payment = Payment.objects.get(razorpay_order_id=razorpay_order_id)
+            payment.razorpay_payment_id = razorpay_payment_id
+            payment.razorpay_signature = razorpay_signature
+            payment.status = 'SUCCESS'
+            payment.save()
+            
+            return JsonResponse({
+                'success': True,
+                'message': 'Payment verified successfully (Test Mode)'
+            })
+                
+        except Payment.DoesNotExist:
+            return JsonResponse({'success': False, 'error': 'Payment not found'})
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+
+@csrf_exempt
+def create_bill(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            
+            bill = Bill.objects.create(
+                user=request.user if request.user.is_authenticated else None,
+                items=data.get('items', []),
+                subtotal=data.get('subtotal', 0),
+                tax_amount=data.get('tax_amount', 0),
+                total_amount=data.get('total_amount', 0),
+                table_booking_id=data.get('table_booking_id'),
+                event_registration_id=data.get('event_registration_id')
+            )
+            
+            return JsonResponse({
+                'success': True,
+                'bill_id': bill.id,
+                'total_amount': str(bill.total_amount)
+            })
+            
+        except Exception as e:
+            return JsonResponse({'success': False, 'error': str(e)})
+    
+    return JsonResponse({'success': False, 'error': 'Invalid request method'})
+
+def get_user_bills(request):
+    if request.user.is_authenticated:
+        bills = Bill.objects.filter(user=request.user).order_by('-created_at')
+    else:
+        bills = Bill.objects.filter(user=None).order_by('-created_at')[:5]  # Show last 5 guest bills
+    
+    bills_data = []
+    
+    for bill in bills:
+        bills_data.append({
+            'id': bill.id,
+            'items': bill.items,
+            'total_amount': str(bill.total_amount),
+            'payment_status': bill.payment.status if bill.payment else 'PENDING',
+            'created_at': bill.created_at.strftime('%Y-%m-%d %H:%M:%S')
+        })
+    
+    return JsonResponse({'bills': bills_data})
     
     
     

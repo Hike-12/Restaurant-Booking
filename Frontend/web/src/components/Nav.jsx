@@ -80,7 +80,7 @@ function Nav() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
-            {["Home", "Menu", "Events", "Chefs", "Reviews"].map((item) => (
+            {["Home", "Menu", "Events", "Chefs", "Payment", "Reviews"].map((item) => (
               <Link
                 key={item}
                 to={item === "Home" ? "/" : `/${item.toLowerCase()}`}
@@ -166,7 +166,7 @@ function Nav() {
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
             >
-              {["Home", "Menu", "Events", "Chefs", "Reviews", "AI Assistance"].map((item) => (
+              {["Home", "Menu", "Events", "Chefs", "Reviews","Payment", "AI Assistance"].map((item) => (
                 <Link
                   key={item}
                   to={item === "Home"

@@ -19,6 +19,7 @@ import Reviews from "./components/Reviews";
 import Chatbot from "./components/Chatbot";
 import VRScene from "./components/VRScene";
 import Footer from "./components/Footer";
+import Payment from "./components/Payment";
 import { QueryClient,QueryClientProvider } from "@tanstack/react-query";
 
 // Wrap routes with AnimatePresence for smooth page transitions
@@ -38,6 +39,7 @@ function AnimatedRoutes() {
         <Route path="/table-bookings" element={<TableBookingList />} />
         <Route path="/chatbot" element={<Chatbot />} />
         <Route path="/reviews" element={<Reviews />} />
+        <Route path="/payment" element={<Payment />} />
         <Route path="/tour" element={<VRScene />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

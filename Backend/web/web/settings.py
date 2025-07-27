@@ -10,6 +10,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-mrs#irsy(n+)n4c#cvl)7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
+RAZORPAY_KEY_ID = 'rzp_test_1DP5mmOlF5G5ag'
+RAZORPAY_KEY_SECRET = 'rzp_test_1DP5mmOlF5G5ag' 
+
 # Environment detection
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
 
@@ -152,6 +155,9 @@ else:
     CSRF_COOKIE_SAMESITE = 'Lax'
 
 LOGIN_URL = '/api/login/'
+
+# For test mode
+RAZORPAY_TEST_MODE = True
 
 # Google API Configuration
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
