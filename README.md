@@ -71,6 +71,19 @@ The Coffee Cup Restaurant Booking System is a comprehensive web application that
 - Immersive restaurant tour experience
 - Interactive VR scene exploration
 
+### 💳 Payment & Bill Summary
+
+- **Bill Summary Page:** Shows all items in your cart with quantity, price, subtotal, GST (18%), and total.
+- **Test Mode Payments:** Fully integrated test payment flow—no real money required.
+- **How it works:**  
+  1. Add items to your cart from the menu or payment page.
+  2. Go to the **Payment** page from the navbar.
+  3. Review your bill in the Bill Summary section.
+  4. Click **Pay** (Test Mode) to simulate a payment.
+  5. Payment status and bill details are shown instantly.
+
+> The Bill Summary component is always used for payment and checkout, ensuring a clear, transparent, and user-friendly experience.
+
 ## Project Structure
 
 ```
