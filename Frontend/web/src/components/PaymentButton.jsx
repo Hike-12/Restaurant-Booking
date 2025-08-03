@@ -54,10 +54,10 @@ const PaymentButton = ({ amount, description, billItems = [], onPaymentSuccess }
       setIsCreatingBill(false);
 
       // Initialize test payment with modal confirm
-      await initializePayment(amount, description, handleTestConfirm);
-
+      const paymentSuccess = await initializePayment(amount, description, handleTestConfirm);
+      console.log('Payment initialized:', paymentSuccess);
       // Call success callback if payment is successful
-      if (onPaymentSuccess) {
+      if (paymentSuccess && onPaymentSuccess) {
         onPaymentSuccess(billData.bill_id);
       }
 
