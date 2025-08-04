@@ -22,6 +22,7 @@ import Footer from "./components/Footer";
 import Payment from "./components/Payment";
 import { QueryClient,QueryClientProvider } from "@tanstack/react-query";
 
+
 // Wrap routes with AnimatePresence for smooth page transitions
 function AnimatedRoutes() {
   const location = useLocation();
