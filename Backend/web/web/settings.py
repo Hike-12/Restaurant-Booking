@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -10,9 +12,8 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-mrs#irsy(n+)n4c#cvl)7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'False').lower() == 'true'
 
-RAZORPAY_KEY_ID = 'rzp_test_1DP5mmOlF5G5ag'
-RAZORPAY_KEY_SECRET = 'rzp_test_1DP5mmOlF5G5ag' 
-
+RAZORPAY_KEY_ID = os.environ.get('RAZORPAY_KEY_ID')
+RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET')
 # Environment detection
 ENVIRONMENT = os.environ.get('ENVIRONMENT', 'development')
 

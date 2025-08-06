@@ -21,8 +21,9 @@ from datetime import datetime
 from django.utils import timezone
 from dotenv import load_dotenv
 from urllib.parse import quote
-
+import razorpay
 load_dotenv()
+
 
 def get_bot_response(user_message):
     try:
@@ -398,31 +399,28 @@ def user_registered_events(request):
 @method_decorator(csrf_exempt, name='dispatch')
 class CreateOrderView(View):
     def post(self, request):
+        print(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET)
         try:
             data = json.loads(request.body)
-            amount = int(float(data.get('amount', 0)) * 100)  # Convert to paise
+            amount = int(float(data.get('amount', 0)) * 100)  # in paise
             currency = data.get('currency', 'INR')
-            
-            # Generate test order ID
-            test_order_id = f"order_test_{uuid.uuid4().hex[:10]}"
-            
-            # Save payment record
+            client = razorpay.Client(auth=(settings.RAZORPAY_KEY_ID, settings.RAZORPAY_KEY_SECRET))
+            order = client.order.create({'amount': amount, 'currency': currency, 'payment_capture': 1})
+            # Save payment record as before, but use order['id']
             payment = Payment.objects.create(
                 user=request.user if request.user.is_authenticated else None,
-                razorpay_order_id=test_order_id,
-                amount=amount / 100,  # Convert back to rupees
+                razorpay_order_id=order['id'],
+                amount=amount / 100,
                 currency=currency,
                 description=data.get('description', 'Restaurant Bill Payment')
             )
-            
             return JsonResponse({
                 'success': True,
-                'order_id': test_order_id,
+                'order_id': order['id'],
                 'amount': amount,
                 'currency': currency,
                 'key': settings.RAZORPAY_KEY_ID
             })
-            
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)})
 
