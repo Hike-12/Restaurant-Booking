@@ -127,9 +127,9 @@ const Payment = () => {
               </h2>
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-h-96 overflow-y-auto">
-                {menus.map((menu) => (
+                {menus.map((menu,idx) => (
                   <motion.div
-                    key={`menu-${menu.id}`}
+                    key={`menu-${menu.id ?? idx}`}
                     className="bg-sand rounded-lg p-4 border border-olive/30 hover:border-olive transition-colors"
                     whileHover={{ scale: 1.02 }}
                   >
@@ -141,7 +141,7 @@ const Payment = () => {
                         <p className="text-olive font-bold">₹{menu.cost}</p>
                       </div>
                       <button
-                        onClick={() => addToCart(menu)}
+                        onClick={() => addToCart({ ...menu, id: menu.id ?? `fallback-${idx}` })}
                         className="bg-olive text-sand p-2 rounded-lg hover:bg-black transition-colors"
                       >
                         <Plus size={16} />
@@ -245,10 +245,10 @@ const Payment = () => {
         >
           <h3 className="text-xl font-bold text-darkBrown mb-4">Quick Add Popular Items</h3>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            {menus.slice(0, 4).map((menu) => (
+            {menus.slice(0, 4).map((menu,idx) => (
               <button
-                key={`quick-${menu.id}`}
-                onClick={() => addToCart(menu)}
+                key={`quick-${menu.id ??idx}`}
+                onClick={() => addToCart({ ...menu, id: menu.id ?? `fallback-${idx}` })}
                 className="bg-olive text-sand py-3 px-4 rounded-lg hover:bg-black transition-colors font-medium text-sm"
               >
                 {menu.item} - ₹{menu.cost}
