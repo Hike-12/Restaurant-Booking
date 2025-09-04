@@ -22,6 +22,7 @@ const events = [
   },
 ];
 
+
 const Events = () => {
   return (
     <div className="min-h-screen bg-sand py-12 px-4">
