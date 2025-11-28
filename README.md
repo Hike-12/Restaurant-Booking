@@ -1,5 +1,6 @@
 # Restaurant Booking System - The Coffee Cup
 
+
 ## Project Abstract
 
 The Coffee Cup Restaurant Booking System is a comprehensive web application that revolutionizes the dining experience through digital innovation. This platform enables customers to explore menus, book exclusive themed dining events, reserve tables, and interact with an AI-powered chatbot for personalized assistance. The system features a robust event management system with queue handling, real-time table booking with visual layouts, QR code generation for events, chef profiles, customer reviews, and a virtual reality tour experience. Built with modern web technologies, it provides seamless user authentication, responsive design, and optimized image loading for an exceptional user experience across all devices.
