@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.76.2",
-    "aframe": "^1.6.0",
+    "aframe": "^1.7.1",
     "aframe-react": "^4.4.0",
     "framer-motion": "^12.12.1",
     "lucide": "^0.452.0",
@@ -36,6 +36,6 @@
     "globals": "^15.9.0",
     "postcss": "^8.4.47",
     "tailwindcss": "^3.4.13",
-    "vite": "^5.4.8"
+    "vite": "^7.2.7"
   }
 }
