@@ -26,6 +26,7 @@ ALLOWED_HOSTS = [
 
 # Application definition
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -162,3 +163,16 @@ RAZORPAY_TEST_MODE = True
 
 # Google API Configuration
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Admin",
+    "site_header": "Restaurant Booking Admin",
+    "site_brand": "Restaurant CMS",
+    "welcome_sign": "Welcome to the Admin Panel",
+    "show_sidebar": True,
+    "navigation_expanded": True,
+    "icons": {
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+}
