@@ -10,8 +10,7 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const performLogin = async (loginUsername, loginPassword) => {
     setIsLoading(true);
 
     try {
@@ -20,7 +19,7 @@ const Login = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ username: loginUsername, password: loginPassword }),
         credentials: "include",
       });
 
@@ -42,6 +41,20 @@ const Login = () => {
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    await performLogin(username, password);
+  };
+
+  const handleTestCredentialsLogin = async () => {
+    const testUsername = "Aliqyaan";
+    const testPassword = "aliqyaan123";
+
+    setUsername(testUsername);
+    setPassword(testPassword);
+    await performLogin(testUsername, testPassword);
   };
 
   return (
@@ -94,6 +107,16 @@ const Login = () => {
             </div>
           </form>
         </motion.div>
+        <button
+          type="button"
+          onClick={handleTestCredentialsLogin}
+          disabled={isLoading}
+          className={`absolute bottom-6 left-6 bg-darkBrown hover:bg-black text-sand font-semibold py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-olive ${
+            isLoading ? "opacity-50 cursor-not-allowed" : ""
+          }`}
+        >
+          Login with test credentials
+        </button>
       </div>
     </>
   );
