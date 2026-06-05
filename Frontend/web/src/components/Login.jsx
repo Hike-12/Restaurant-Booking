@@ -102,19 +102,19 @@ const Login = () => {
                 {isLoading ? "Logging in..." : "Login"}
               </button>
             </div>
+            <button
+              type="button"
+              onClick={handleTestCredentialsLogin}
+              disabled={isLoading}
+              aria-label="Login using predefined test account credentials"
+              className={`ml-auto block bg-darkBrown hover:bg-black text-sand font-semibold py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-olive ${
+                isLoading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              Login with test credentials
+            </button>
           </form>
         </motion.div>
-        <button
-          type="button"
-          onClick={handleTestCredentialsLogin}
-          disabled={isLoading}
-          aria-label="Login using predefined test account credentials"
-          className={`absolute bottom-6 left-6 bg-darkBrown hover:bg-black text-sand font-semibold py-2 px-4 rounded-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-olive ${
-            isLoading ? "opacity-50 cursor-not-allowed" : ""
-          }`}
-        >
-          Login with test credentials
-        </button>
       </div>
     </>
   );
