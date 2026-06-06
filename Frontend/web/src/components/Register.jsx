@@ -8,7 +8,43 @@ const Register = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const performTestLogin = async () => {
+    setIsLoading(true);
+    try {
+      const response = await fetch(`${VITE_API_BASE_URL}/login/`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: "Aliqyaan",
+          password: "aliqyaan123",
+        }),
+        credentials: "include",
+      });
+
+      const data = await response.json();
+      if (response.ok && data.success) {
+        localStorage.setItem("authToken", data.token);
+        localStorage.setItem("username", data.username);
+        localStorage.setItem("isAuthenticated", "true");
+        toast.success("Login successful! Welcome back!");
+        navigate("/");
+      } else {
+        toast.error(
+          data.message || "Login failed. Please check your credentials."
+        );
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      toast.error("Network error. Please try again later.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,9 +119,25 @@ const Register = () => {
             <div>
               <button
                 type="submit"
-                className="bg-olive hover:bg-black text-sand font-bold py-3 px-4 rounded-lg w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-olive"
+                disabled={isLoading}
+                className={`bg-olive hover:bg-black text-sand font-bold py-3 px-4 rounded-lg w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-olive ${
+                  isLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
               >
                 Register
+              </button>
+            </div>
+            <div>
+              <button
+                type="button"
+                onClick={performTestLogin}
+                disabled={isLoading}
+                aria-label="Login using predefined test account credentials"
+                className={`bg-darkBrown hover:bg-black text-sand font-bold py-3 px-4 rounded-lg w-full transition duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-olive ${
+                  isLoading ? "opacity-50 cursor-not-allowed" : ""
+                }`}
+              >
+                Login with test credentials
               </button>
             </div>
           </form>
